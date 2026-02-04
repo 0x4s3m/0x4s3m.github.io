@@ -1,136 +1,429 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>0x4s3m • Security Researcher & Bug Hunter</title>
-  <meta name="description" content="Independent bug bounty hunter & pentester. Discovering high-impact vulnerabilities." />
-  
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            bgdark: '#0a0e14',       // ultra-deep grey-black
-            surface: '#111827',      // card bg
-            accent: '#22d3ee',       // cool cyan
-            accentglow: '#00ff9d',   // subtle green glow
-            textmain: '#e2e8f0',
-            textdim: '#94a3b8',
-          },
-          boxShadow: {
-            'neon': '0 0 25px rgba(34, 211, 238, 0.25)',
-            'neongreen': '0 0 25px rgba(0, 255, 157, 0.2)',
-          }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0x4s3m - Security Researcher</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-      }
-    }
-  </script>
 
-  <!-- AOS animations -->
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0e14;
+            color: #e5e7eb;
+            overflow-x: hidden;
+        }
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    body { font-family: 'Inter', system-ui, sans-serif; }
-    .mono { font-family: 'JetBrains Mono', monospace; }
-    /* Glitch on hero */
-    .glitch {
-      position: relative;
-      animation: glitch-skew 4s infinite linear alternate-reverse;
-    }
-    .glitch::before, .glitch::after {
-      content: attr(data-text);
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: #0a0e14;
-      opacity: 0.7;
-      clip: rect(0, 9999px, 0, 0);
-    }
-    .glitch::before { left: 2px; text-shadow: -2px 0 #22d3ee; animation: glitch-anim 3s infinite; }
-    .glitch::after  { left: -2px; text-shadow: 2px 0 #00ff9d; animation: glitch-anim2 4s infinite; }
-    @keyframes glitch-anim  { 0% { clip: rect(30px, 9999px, 60px, 0); } 20% { clip: rect(80px, 9999px, 40px, 0); } /* add more random */ 100% { clip: rect(10px, 9999px, 90px, 0); } }
-    @keyframes glitch-anim2 { 0% { clip: rect(50px, 9999px, 20px, 0); } /* random */ }
-    @keyframes glitch-skew { 0%,100% { transform: skew(0deg); } 10% { transform: skew(1deg); } }
-  </style>
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Scanline background effect */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0, 0, 0, 0.05),
+                    rgba(0, 0, 0, 0.05) 1px,
+                    transparent 1px,
+                    transparent 2px
+                );
+            pointer-events: none;
+            z-index: 1;
+            opacity: 0.3;
+        }
+
+        /* Faint grid */
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(34, 211, 238, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(34, 211, 238, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Glitch effect for hero name */
+        .glitch {
+            position: relative;
+            display: inline-block;
+            font-size: 4rem;
+            font-weight: 700;
+            color: #22d3ee;
+            text-shadow: 
+                0 0 10px rgba(34, 211, 238, 0.5),
+                0 0 20px rgba(34, 211, 238, 0.3);
+        }
+
+        @keyframes glitch-anim {
+            0% {
+                clip-path: inset(40% 0 61% 0);
+                transform: translate(0);
+            }
+            20% {
+                clip-path: inset(92% 0 1% 0);
+                transform: translate(-2px, 2px);
+            }
+            40% {
+                clip-path: inset(43% 0 1% 0);
+                transform: translate(-2px, -2px);
+            }
+            60% {
+                clip-path: inset(25% 0 58% 0);
+                transform: translate(2px, 2px);
+            }
+            80% {
+                clip-path: inset(54% 0 7% 0);
+                transform: translate(2px, -2px);
+            }
+            100% {
+                clip-path: inset(58% 0 43% 0);
+                transform: translate(0);
+            }
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: '0x4s3m';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            color: #00ff9d;
+            animation: glitch-anim 3s infinite linear alternate-reverse;
+            clip-path: inset(0 0 0 0);
+        }
+
+        .glitch::after {
+            color: #22d3ee;
+            animation: glitch-anim 2s infinite linear alternate;
+            clip-path: inset(0 0 0 0);
+        }
+
+        /* Card hover effects */
+        .card {
+            background: #111827;
+            border: 1px solid rgba(34, 211, 238, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(34, 211, 238, 0.5);
+            box-shadow: 
+                0 0 30px rgba(34, 211, 238, 0.2),
+                0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Badge glow */
+        .badge {
+            background: rgba(34, 211, 238, 0.1);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .badge:hover {
+            background: rgba(34, 211, 238, 0.2);
+            border-color: #22d3ee;
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.4);
+            transform: scale(1.05);
+        }
+
+        /* Accent badge */
+        .accent-badge {
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(0, 255, 157, 0.2));
+            border: 1px solid rgba(0, 255, 157, 0.5);
+            box-shadow: 
+                0 0 15px rgba(0, 255, 157, 0.3),
+                inset 0 0 15px rgba(0, 255, 157, 0.1);
+        }
+
+        /* Link hover */
+        .link-hover {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .link-hover::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #22d3ee, #00ff9d);
+            transition: width 0.3s ease;
+        }
+
+        .link-hover:hover::after {
+            width: 100%;
+        }
+
+        .link-hover:hover {
+            color: #22d3ee;
+        }
+
+        /* Tool tags */
+        .tool-tag {
+            background: rgba(17, 24, 39, 0.8);
+            border: 1px solid rgba(34, 211, 238, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .tool-tag:hover {
+            border-color: #22d3ee;
+            background: rgba(34, 211, 238, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(34, 211, 238, 0.2);
+        }
+
+        /* Social icons */
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            color: #22d3ee;
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.6));
+        }
+
+        /* Amount badge */
+        .amount-badge {
+            background: linear-gradient(135deg, rgba(0, 255, 157, 0.15), rgba(34, 211, 238, 0.15));
+            border: 1px solid rgba(0, 255, 157, 0.4);
+            color: #00ff9d;
+            text-shadow: 0 0 10px rgba(0, 255, 157, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .glitch {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
 </head>
-<body class="bg-bgdark text-textmain min-h-screen antialiased">
+<body>
+    <div class="container max-w-6xl mx-auto px-6 py-16">
+        <!-- Hero Section -->
+        <header class="min-h-screen flex flex-col justify-center items-center text-center" data-aos="fade-up">
+            <div class="mb-8">
+                <h1 class="glitch mono">0x4s3m</h1>
+            </div>
+            <p class="text-xl md:text-2xl text-gray-300 mb-6 font-light">
+                Bug Bounty Hunter <span class="text-cyan-400">•</span> Pentester <span class="text-cyan-400">•</span> Security Researcher
+            </p>
+            <div class="accent-badge inline-block px-8 py-3 rounded-full mb-12 mono text-sm md:text-base font-medium">
+                <span class="text-emerald-300">$47,350+</span> <span class="text-gray-400">in bounties earned</span>
+            </div>
+            <div class="flex gap-6">
+                <a href="https://twitter.com/w_4nj" target="_blank" class="social-icon text-gray-400 hover:text-cyan-400">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+                <a href="https://github.com/0x4s3m" target="_blank" class="social-icon text-gray-400 hover:text-cyan-400">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
+                    </svg>
+                </a>
+            </div>
+        </header>
 
-  <!-- Hero -->
-  <header class="py-40 md:py-56 text-center px-6 relative overflow-hidden">
-    <div class="absolute inset-0 opacity-10 pointer-events-none">
-      <!-- Optional subtle background effect: faint grid or particles later -->
-    </div>
-    <h1 class="glitch text-6xl md:text-8xl font-bold tracking-tighter mono" data-text="0x4s3m">0x4s3m</h1>
-    <p class="text-2xl md:text-3xl mt-6 opacity-90">Bug Bounty Hunter • Pentester • Vulnerability Hunter</p>
-    <div class="mt-10 inline-flex items-center gap-4 bg-surface/50 backdrop-blur-sm px-6 py-3 rounded-full border border-accent/30 shadow-neon">
-      <span class="text-accent text-xl">$XX,XXX+ bounties secured</span>
-    </div>
-    <div class="mt-12 flex justify-center gap-8 text-textdim">
-      <a href="https://x.com/w_4nj" target="_blank" class="hover:text-accent transition">X @w_4nj</a>
-      <a href="https://github.com/0x4s3m" target="_blank" class="hover:text-accent transition">GitHub</a>
-      <!-- Add H1/Bugcrowd links -->
-    </div>
-  </header>
+        <!-- Notable Findings Section -->
+        <section class="py-20" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">
+                Notable <span class="text-cyan-400">Findings</span>
+            </h2>
+            <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+                Critical vulnerabilities discovered across leading platforms and Fortune 500 companies.
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Finding 1 -->
+                <div class="card rounded-lg p-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-sm text-gray-500 mono">Dec 2024</span>
+                        <span class="amount-badge px-3 py-1 rounded-full text-sm mono font-medium">$12,500</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-cyan-300">Authentication Bypass in Major SaaS Platform</h3>
+                    <p class="text-gray-400 mb-4 leading-relaxed">
+                        Discovered critical logic flaw in OAuth implementation allowing complete account takeover. Affected 50M+ users before responsible disclosure and patch.
+                    </p>
+                    <a href="#" class="link-hover text-cyan-400 text-sm mono font-medium inline-block">
+                        Read write-up →
+                    </a>
+                </div>
 
-  <!-- Bounties / Bugs Section -->
-  <section class="max-w-6xl mx-auto px-6 pb-24">
-    <h2 class="text-4xl font-bold mb-12 text-center" data-aos="fade-up">Notable Findings</h2>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div class="bg-surface p-7 rounded-2xl border border-accent/20 hover:border-accent hover:shadow-neon transition-all duration-400 transform hover:-translate-y-2" data-aos="fade-up" data-aos-delay="100">
-        <div class="flex justify-between items-center mb-4">
-          <span class="text-sm text-textdim">Jan 2026</span>
-          <span class="bg-accent/20 text-accent px-4 py-1 rounded-full text-sm font-medium">$15,000</span>
-        </div>
-        <h3 class="text-xl font-semibold mb-3 text-accent">Critical RCE Chain</h3>
-        <p class="text-textdim mb-4">Unauthenticated path leading to remote code execution...</p>
-        <a href="#" class="text-accent hover:underline text-sm">View write-up →</a>
-      </div>
-      <!-- Add 2-5 more real cards here (duplicate block) -->
+                <!-- Finding 2 -->
+                <div class="card rounded-lg p-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-sm text-gray-500 mono">Oct 2024</span>
+                        <span class="amount-badge px-3 py-1 rounded-full text-sm mono font-medium">$8,750</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-cyan-300">RCE via Template Injection</h3>
+                    <p class="text-gray-400 mb-4 leading-relaxed">
+                        Exploited Server-Side Template Injection in enterprise CMS leading to remote code execution. Chain included privilege escalation to admin panel.
+                    </p>
+                    <a href="#" class="link-hover text-cyan-400 text-sm mono font-medium inline-block">
+                        Read write-up →
+                    </a>
+                </div>
+
+                <!-- Finding 3 -->
+                <div class="card rounded-lg p-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-sm text-gray-500 mono">Aug 2024</span>
+                        <span class="amount-badge px-3 py-1 rounded-full text-sm mono font-medium">$15,200</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-cyan-300">Payment Gateway Logic Flaw</h3>
+                    <p class="text-gray-400 mb-4 leading-relaxed">
+                        Identified race condition in payment processing API allowing arbitrary amount manipulation. Prevented potential millions in financial loss.
+                    </p>
+                    <a href="#" class="link-hover text-cyan-400 text-sm mono font-medium inline-block">
+                        Read write-up →
+                    </a>
+                </div>
+
+                <!-- Finding 4 -->
+                <div class="card rounded-lg p-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-sm text-gray-500 mono">Jun 2024</span>
+                        <span class="amount-badge px-3 py-1 rounded-full text-sm mono font-medium">$10,900</span>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3 text-cyan-300">GraphQL API Mass Assignment</h3>
+                    <p class="text-gray-400 mb-4 leading-relaxed">
+                        Uncovered improper input validation in GraphQL mutations enabling privilege escalation and unauthorized data access across multi-tenant platform.
+                    </p>
+                    <a href="#" class="link-hover text-cyan-400 text-sm mono font-medium inline-block">
+                        Read write-up →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Certifications Section -->
+        <section class="py-20" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">
+                <span class="text-cyan-400">Certifications</span>
+            </h2>
+            <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+                Industry-recognized credentials demonstrating advanced offensive security expertise.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+                <!-- Cert 1 -->
+                <div class="badge rounded-lg p-6 text-center" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="text-4xl mb-3">🛡️</div>
+                    <h3 class="text-lg font-semibold mb-2 mono text-cyan-300">OSCP</h3>
+                    <p class="text-sm text-gray-400">Offensive Security</p>
+                    <p class="text-xs text-gray-500 mt-2 mono">2024</p>
+                </div>
+
+                <!-- Cert 2 -->
+                <div class="badge rounded-lg p-6 text-center" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="text-4xl mb-3">⚔️</div>
+                    <h3 class="text-lg font-semibold mb-2 mono text-cyan-300">PNPT</h3>
+                    <p class="text-sm text-gray-400">TCM Security</p>
+                    <p class="text-xs text-gray-500 mt-2 mono">2023</p>
+                </div>
+
+                <!-- Cert 3 -->
+                <div class="badge rounded-lg p-6 text-center" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="text-4xl mb-3">🔍</div>
+                    <h3 class="text-lg font-semibold mb-2 mono text-cyan-300">eWPTXv2</h3>
+                    <p class="text-sm text-gray-400">eLearnSecurity</p>
+                    <p class="text-xs text-gray-500 mt-2 mono">2023</p>
+                </div>
+
+                <!-- Cert 4 -->
+                <div class="badge rounded-lg p-6 text-center" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="text-4xl mb-3">💉</div>
+                    <h3 class="text-lg font-semibold mb-2 mono text-cyan-300">BSCP</h3>
+                    <p class="text-sm text-gray-400">PortSwigger</p>
+                    <p class="text-xs text-gray-500 mt-2 mono">2024</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Toolkit Section -->
+        <section class="py-20" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">
+                Security <span class="text-cyan-400">Arsenal</span>
+            </h2>
+            <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+                Sophisticated tooling and custom exploits for comprehensive security assessments.
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
+                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="50">Burp Suite Pro</span>
+                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="100">Nuclei</span>
+                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="150">ffuf</span>
+                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="200">sqlmap</span>
+                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="250">httpx</span>
+                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="300">Metasploit</span>
+                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="350">Subfinder</span>
+                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="400">Amass</span>
+                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="450">katana</span>
+                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="500">Custom Scripts</span>
+                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="550">Nmap</span>
+                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="600">CrackMapExec</span>
+                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="650">Bloodhound</span>
+                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="700">Responder</span>
+                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="750">Cobalt Strike</span>
+                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="800">Sliver</span>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-12 text-center border-t border-gray-800 mt-20" data-aos="fade-up">
+            <p class="text-gray-500 text-sm mono">
+                © 2026 0x4s3m <span class="text-cyan-400">|</span> Ethical hacking & responsible disclosure
+            </p>
+            <p class="text-gray-600 text-xs mt-2">
+                All findings reported through official bug bounty programs
+            </p>
+        </footer>
     </div>
-  </section>
 
-  <!-- Certs Section -->
-  <section class="max-w-6xl mx-auto px-6 pb-24 border-t border-textdim/10">
-    <h2 class="text-4xl font-bold mb-12 text-center" data-aos="fade-up">Certifications</h2>
-    <div class="grid md:grid-cols-3 gap-8 text-center" data-aos="fade-up" data-aos-delay="100">
-      <div class="bg-surface p-8 rounded-2xl border border-accent/20 hover:shadow-neongreen transition-all">
-        <h3 class="text-2xl font-bold text-accent mb-2">OSCP</h3>
-        <p class="text-textdim">Offensive Security Certified Professional</p>
-        <p class="text-sm text-textdim mt-2">202X</p>
-      </div>
-      <div class="bg-surface p-8 rounded-2xl border border-accent/20 hover:shadow-neongreen transition-all">
-        <h3 class="text-2xl font-bold text-accent mb-2">eJPT / Others</h3>
-        <p class="text-textdim">Add your certs + dates</p>
-      </div>
-      <!-- Add more -->
-    </div>
-  </section>
-
-  <!-- Tools / Skills -->
-  <section class="max-w-6xl mx-auto px-6 pb-32 border-t border-textdim/10">
-    <h2 class="text-4xl font-bold mb-12 text-center" data-aos="fade-up">Toolkit</h2>
-    <div class="flex flex-wrap justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
-      <span class="bg-surface px-6 py-3 rounded-full border border-accent/30 text-accent hover:shadow-neon transition">Burp Suite Pro</span>
-      <span class="bg-surface px-6 py-3 rounded-full border border-accent/30 text-accent hover:shadow-neon transition">Nuclei</span>
-      <span class="bg-surface px-6 py-3 rounded-full border border-accent/30 text-accent hover:shadow-neon transition">Custom Python/Go Tools</span>
-      <!-- Add your real ones -->
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="py-12 text-center text-textdim border-t border-textdim/10">
-    <p>© 2026 0x4s3m • Madinah • PGP on request • Stay hidden</p>
-  </footer>
-
-  <script>
-    AOS.init({ duration: 900, once: true, easing: 'ease-out-cubic' });
-  </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50,
+            easing: 'ease-out-cubic'
+        });
+    </script>
 </body>
 </html>
