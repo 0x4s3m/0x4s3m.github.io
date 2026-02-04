@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>0x4s3m • Bug Hunter & Security Researcher</title>
+  <meta name="description" content="Independent security researcher & bug bounty hunter. Finding vulns that matter." />
+  
+  <!-- Tailwind CDN (zero setup) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            bgdark: '#0f1117',      // deep charcoal grey
+            surface: '#1e293b',     // card bg
+            accent: '#22d3ee',      // muted cyan
+            accentdark: '#0ea5e9',
+            textmain: '#e2e8f0',
+            textdim: '#94a3b8',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- AOS for subtle scroll animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- Google Fonts: Inter (clean & modern) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', system-ui, sans-serif; }
+    code, pre { font-family: 'JetBrains Mono', monospace; }
+  </style>
+</head>
+<body class="bg-bgdark text-textmain min-h-screen antialiased">
+
+  <!-- Hero Section -->
+  <header class="py-32 md:py-48 text-center px-6">
+    <h1 class="text-5xl md:text-7xl font-bold tracking-tight">0x4s3m</h1>
+    <p class="text-xl md:text-2xl mt-6 opacity-90">Bug Bounty Hunter • Pentester • Security Researcher</p>
+    <p class="mt-8 text-accent text-2xl md:text-3xl font-medium">$XX,XXX+ earned • Active on HackerOne / Bugcrowd</p>
+    <div class="mt-10 flex justify-center gap-6">
+      <a href="https://x.com/w_4nj" target="_blank" class="text-textdim hover:text-accent transition">X / @w_4nj</a>
+      <a href="https://github.com/0x4s3m" target="_blank" class="text-textdim hover:text-accent transition">GitHub</a>
+      <!-- Add HackerOne / others -->
+    </div>
+  </header>
+
+  <!-- Research / Bounties Section -->
+  <section class="max-w-6xl mx-auto px-6 pb-24">
+    <h2 class="text-4xl font-bold mb-12 text-center" data-aos="fade-up">Security Research & Findings</h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      
+      <!-- Example Bounty Card -->
+      <div class="bg-surface p-6 rounded-xl border border-accent/10 hover:border-accent/40 hover:shadow-[0_8px_30px_rgba(34,211,238,0.08)] transition-all duration-300 transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="100">
+        <div class="flex justify-between items-center mb-4">
+          <span class="text-sm text-textdim">February 2026</span>
+          <span class="bg-accent/20 text-accent px-3 py-1 rounded-full text-xs font-medium">$12,500</span>
+        </div>
+        <h3 class="text-xl font-semibold mb-3">Critical SSRF → Internal Pivot in [Company]</h3>
+        <p class="text-textdim mb-4 line-clamp-3">Discovered blind SSRF leading to internal network access and sensitive data exposure...</p>
+        <a href="#" class="text-accent hover:underline text-sm">Read full write-up →</a>
+      </div>
+
+      <!-- Add more cards like this (duplicate & edit) -->
+      <div class="bg-surface p-6 rounded-xl border border-accent/10 hover:border-accent/40 hover:shadow-[0_8px_30px_rgba(34,211,238,0.08)] transition-all duration-300 transform hover:-translate-y-1" data-aos="fade-up" data-aos-delay="200">
+        <!-- Your next finding... -->
+      </div>
+
+      <!-- ... more cards -->
+    </div>
+  </section>
+
+  <!-- Tech Stack / Tools -->
+  <section class="max-w-6xl mx-auto px-6 pb-24 border-t border-textdim/10">
+    <h2 class="text-4xl font-bold mb-12 text-center" data-aos="fade-up">Toolkit & Stack</h2>
+    <div class="flex flex-wrap justify-center gap-6" data-aos="fade-up" data-aos-delay="100">
+      <span class="bg-surface px-5 py-3 rounded-full text-sm border border-accent/20">Burp Suite</span>
+      <span class="bg-surface px-5 py-3 rounded-full text-sm border border-accent/20">Nuclei</span>
+      <span class="bg-surface px-5 py-3 rounded-full text-sm border border-accent/20">Custom Scripts (Python/Go)</span>
+      <!-- Add yours -->
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-12 text-center text-textdim border-t border-textdim/10">
+    <p>© 2026 0x4s3m • <a href="https://x.com/w_4nj" class="hover:text-accent">X</a> • PGP available on request</p>
+  </footer>
+
+  <script>
+    AOS.init({
+      duration: 800,
+      once: true,
+      easing: 'ease-out'
+    });
+  </script>
+</body>
+</html>
