@@ -159,6 +159,20 @@
             transform: scale(1.05);
         }
 
+        /* Platform badge */
+        .platform-badge {
+            background: rgba(17, 24, 39, 0.8);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .platform-badge:hover {
+            background: rgba(34, 211, 238, 0.15);
+            border-color: #22d3ee;
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
+            transform: translateY(-3px);
+        }
+
         /* Accent badge */
         .accent-badge {
             background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(0, 255, 157, 0.2));
@@ -244,15 +258,15 @@
                 Bug Bounty Hunter <span class="text-cyan-400">•</span> Pentester <span class="text-cyan-400">•</span> Security Researcher
             </p>
             <div class="accent-badge inline-block px-8 py-3 rounded-full mb-12 mono text-sm md:text-base font-medium">
-                <span class="text-emerald-300">$47,350+</span> <span class="text-gray-400">in bounties earned</span>
+                <span class="text-emerald-300">Active</span> <span class="text-gray-400">on multiple platforms</span>
             </div>
             <div class="flex gap-6">
-                <a href="https://twitter.com/w_4nj" target="_blank" class="social-icon text-gray-400 hover:text-cyan-400">
+                <a href="https://twitter.com/w_4nj" target="_blank" rel="noopener noreferrer" class="social-icon text-gray-400 hover:text-cyan-400">
                     <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                     </svg>
                 </a>
-                <a href="https://github.com/0x4s3m" target="_blank" class="social-icon text-gray-400 hover:text-cyan-400">
+                <a href="https://github.com/0x4s3m" target="_blank" rel="noopener noreferrer" class="social-icon text-gray-400 hover:text-cyan-400">
                     <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
                         <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
                     </svg>
@@ -260,73 +274,109 @@
             </div>
         </header>
 
+        <!-- Platforms Section -->
+        <section class="py-20" data-aos="fade-up">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">
+                Active <span class="text-cyan-400">Platforms</span>
+            </h2>
+            <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+                Engaging with the security community across multiple bug bounty and CTF platforms.
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                <!-- Bugcrowd -->
+                <a href="https://bugcrowd.com/h/0x4s3m" target="_blank" rel="noopener noreferrer" class="platform-badge rounded-lg p-6 text-center block" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="text-4xl mb-3">🐛</div>
+                    <h3 class="text-lg font-semibold mb-2 mono text-cyan-300">Bugcrowd</h3>
+                    <p class="text-sm text-gray-400">Bug Bounty Platform</p>
+                    <p class="text-xs text-emerald-400 mt-3 mono">View Profile →</p>
+                </a>
+
+                <!-- HackTheBox -->
+                <a href="https://app.hackthebox.com/users/3060841" target="_blank" rel="noopener noreferrer" class="platform-badge rounded-lg p-6 text-center block" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="text-4xl mb-3">📦</div>
+                    <h3 class="text-lg font-semibold mb-2 mono text-cyan-300">HackTheBox</h3>
+                    <p class="text-sm text-gray-400">Penetration Testing Labs</p>
+                    <p class="text-xs text-emerald-400 mt-3 mono">View Profile →</p>
+                </a>
+
+                <!-- Flagyard -->
+                <a href="https://flagyard.com/profile/0x4s3m" target="_blank" rel="noopener noreferrer" class="platform-badge rounded-lg p-6 text-center block" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="text-4xl mb-3">🚩</div>
+                    <h3 class="text-lg font-semibold mb-2 mono text-cyan-300">Flagyard</h3>
+                    <p class="text-sm text-gray-400">CTF & Challenges</p>
+                    <p class="text-xs text-emerald-400 mt-3 mono">View Profile →</p>
+                </a>
+            </div>
+        </section>
+
         <!-- Notable Findings Section -->
         <section class="py-20" data-aos="fade-up">
             <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">
                 Notable <span class="text-cyan-400">Findings</span>
             </h2>
             <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-                Critical vulnerabilities discovered across leading platforms and Fortune 500 companies.
+                Critical vulnerabilities discovered through responsible disclosure programs.
             </p>
             
             <div class="grid md:grid-cols-2 gap-6">
                 <!-- Finding 1 -->
                 <div class="card rounded-lg p-6" data-aos="fade-up" data-aos-delay="100">
                     <div class="flex justify-between items-start mb-4">
-                        <span class="text-sm text-gray-500 mono">Dec 2024</span>
-                        <span class="amount-badge px-3 py-1 rounded-full text-sm mono font-medium">$12,500</span>
+                        <span class="text-sm text-gray-500 mono">Recent</span>
+                        <span class="amount-badge px-3 py-1 rounded-full text-sm mono font-medium">Critical</span>
                     </div>
-                    <h3 class="text-xl font-semibold mb-3 text-cyan-300">Authentication Bypass in Major SaaS Platform</h3>
+                    <h3 class="text-xl font-semibold mb-3 text-cyan-300">Authentication Bypass Vulnerability</h3>
                     <p class="text-gray-400 mb-4 leading-relaxed">
-                        Discovered critical logic flaw in OAuth implementation allowing complete account takeover. Affected 50M+ users before responsible disclosure and patch.
+                        Discovered critical authentication flaw allowing unauthorized access to protected resources. Responsibly disclosed and patched.
                     </p>
                     <a href="#" class="link-hover text-cyan-400 text-sm mono font-medium inline-block">
-                        Read write-up →
+                        Read more →
                     </a>
                 </div>
 
                 <!-- Finding 2 -->
                 <div class="card rounded-lg p-6" data-aos="fade-up" data-aos-delay="200">
                     <div class="flex justify-between items-start mb-4">
-                        <span class="text-sm text-gray-500 mono">Oct 2024</span>
-                        <span class="amount-badge px-3 py-1 rounded-full text-sm mono font-medium">$8,750</span>
+                        <span class="text-sm text-gray-500 mono">Recent</span>
+                        <span class="amount-badge px-3 py-1 rounded-full text-sm mono font-medium">High</span>
                     </div>
-                    <h3 class="text-xl font-semibold mb-3 text-cyan-300">RCE via Template Injection</h3>
+                    <h3 class="text-xl font-semibold mb-3 text-cyan-300">SQL Injection in API Endpoint</h3>
                     <p class="text-gray-400 mb-4 leading-relaxed">
-                        Exploited Server-Side Template Injection in enterprise CMS leading to remote code execution. Chain included privilege escalation to admin panel.
+                        Identified SQL injection vulnerability in API allowing unauthorized data extraction. Reported through bug bounty program.
                     </p>
                     <a href="#" class="link-hover text-cyan-400 text-sm mono font-medium inline-block">
-                        Read write-up →
+                        Read more →
                     </a>
                 </div>
 
                 <!-- Finding 3 -->
                 <div class="card rounded-lg p-6" data-aos="fade-up" data-aos-delay="300">
                     <div class="flex justify-between items-start mb-4">
-                        <span class="text-sm text-gray-500 mono">Aug 2024</span>
-                        <span class="amount-badge px-3 py-1 rounded-full text-sm mono font-medium">$15,200</span>
+                        <span class="text-sm text-gray-500 mono">Recent</span>
+                        <span class="amount-badge px-3 py-1 rounded-full text-sm mono font-medium">Medium</span>
                     </div>
-                    <h3 class="text-xl font-semibold mb-3 text-cyan-300">Payment Gateway Logic Flaw</h3>
+                    <h3 class="text-xl font-semibold mb-3 text-cyan-300">IDOR in User Management</h3>
                     <p class="text-gray-400 mb-4 leading-relaxed">
-                        Identified race condition in payment processing API allowing arbitrary amount manipulation. Prevented potential millions in financial loss.
+                        Uncovered Insecure Direct Object Reference allowing access to other users' sensitive information through predictable identifiers.
                     </p>
                     <a href="#" class="link-hover text-cyan-400 text-sm mono font-medium inline-block">
-                        Read write-up →
+                        Read more →
                     </a>
                 </div>
 
                 <!-- Finding 4 -->
                 <div class="card rounded-lg p-6" data-aos="fade-up" data-aos-delay="400">
                     <div class="flex justify-between items-start mb-4">
-                        <span class="text-sm text-gray-500 mono">Jun 2024</span>
-                        <span class="amount-badge px-3 py-1 rounded-full text-sm mono font-medium">$10,900</span>
+                        <span class="text-sm text-gray-500 mono">Recent</span>
+                        <span class="amount-badge px-3 py-1 rounded-full text-sm mono font-medium">High</span>
                     </div>
-                    <h3 class="text-xl font-semibold mb-3 text-cyan-300">GraphQL API Mass Assignment</h3>
+                    <h3 class="text-xl font-semibold mb-3 text-cyan-300">XSS Leading to Account Takeover</h3>
                     <p class="text-gray-400 mb-4 leading-relaxed">
-                        Uncovered improper input validation in GraphQL mutations enabling privilege escalation and unauthorized data access across multi-tenant platform.
+                        Found stored XSS vulnerability that could be chained with session hijacking for complete account compromise.
                     </p>
                     <a href="#" class="link-hover text-cyan-400 text-sm mono font-medium inline-block">
-                        Read write-up →
+                        Read more →
                     </a>
                 </div>
             </div>
@@ -338,40 +388,32 @@
                 <span class="text-cyan-400">Certifications</span>
             </h2>
             <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-                Industry-recognized credentials demonstrating advanced offensive security expertise.
+                Professional certifications demonstrating offensive security expertise.
             </p>
             
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-5xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
                 <!-- Cert 1 -->
-                <div class="badge rounded-lg p-6 text-center" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="text-4xl mb-3">🛡️</div>
-                    <h3 class="text-lg font-semibold mb-2 mono text-cyan-300">OSCP</h3>
-                    <p class="text-sm text-gray-400">Offensive Security</p>
-                    <p class="text-xs text-gray-500 mt-2 mono">2024</p>
+                <div class="badge rounded-lg p-6" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="flex items-start gap-4">
+                        <div class="text-4xl">🛡️</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold mb-2 mono text-cyan-300">WEB-RTA</h3>
+                            <p class="text-sm text-gray-400">CyberWarfare Labs</p>
+                            <p class="text-xs text-gray-500 mt-2">Web Real-Time Attack Certification</p>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Cert 2 -->
-                <div class="badge rounded-lg p-6 text-center" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="text-4xl mb-3">⚔️</div>
-                    <h3 class="text-lg font-semibold mb-2 mono text-cyan-300">PNPT</h3>
-                    <p class="text-sm text-gray-400">TCM Security</p>
-                    <p class="text-xs text-gray-500 mt-2 mono">2023</p>
-                </div>
-
-                <!-- Cert 3 -->
-                <div class="badge rounded-lg p-6 text-center" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="text-4xl mb-3">🔍</div>
-                    <h3 class="text-lg font-semibold mb-2 mono text-cyan-300">eWPTXv2</h3>
-                    <p class="text-sm text-gray-400">eLearnSecurity</p>
-                    <p class="text-xs text-gray-500 mt-2 mono">2023</p>
-                </div>
-
-                <!-- Cert 4 -->
-                <div class="badge rounded-lg p-6 text-center" data-aos="zoom-in" data-aos-delay="400">
-                    <div class="text-4xl mb-3">💉</div>
-                    <h3 class="text-lg font-semibold mb-2 mono text-cyan-300">BSCP</h3>
-                    <p class="text-sm text-gray-400">PortSwigger</p>
-                    <p class="text-xs text-gray-500 mt-2 mono">2024</p>
+                <div class="badge rounded-lg p-6" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="flex items-start gap-4">
+                        <div class="text-4xl">🎓</div>
+                        <div class="flex-1">
+                            <h3 class="text-lg font-semibold mb-2 mono text-cyan-300">Bug Bounty Jr</h3>
+                            <p class="text-sm text-gray-400">Tuwaiq Academy</p>
+                            <p class="text-xs text-gray-500 mt-2">Bug Bounty Bootcamp Certification</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -382,11 +424,11 @@
                 Security <span class="text-cyan-400">Arsenal</span>
             </h2>
             <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-                Sophisticated tooling and custom exploits for comprehensive security assessments.
+                Sophisticated tooling and methodologies for comprehensive security assessments.
             </p>
             
             <div class="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
-                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="50">Burp Suite Pro</span>
+                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="50">Burp Suite</span>
                 <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="100">Nuclei</span>
                 <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="150">ffuf</span>
                 <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="200">sqlmap</span>
@@ -397,11 +439,11 @@
                 <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="450">katana</span>
                 <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="500">Custom Scripts</span>
                 <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="550">Nmap</span>
-                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="600">CrackMapExec</span>
+                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="600">Gobuster</span>
                 <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="650">Bloodhound</span>
                 <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="700">Responder</span>
-                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="750">Cobalt Strike</span>
-                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="800">Sliver</span>
+                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="750">Wireshark</span>
+                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="800">Python</span>
             </div>
         </section>
 
