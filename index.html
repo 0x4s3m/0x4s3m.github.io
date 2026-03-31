@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>0x4s3m</title>
+    <title>0x4s3m — Security Researcher</title>
     <meta name="description" content="0x4s3m — Web Pentester, Bug Bounty Hunter & Cybersecurity Researcher">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -53,12 +53,14 @@
             text-decoration: none;
         }
 
+        /* ── Layout ── */
         .container {
             max-width: 700px;
             margin: 0 auto;
             padding: 60px 24px 80px;
         }
 
+        /* ── Terminal Nav ── */
         .nav {
             text-align: center;
             margin-bottom: 50px;
@@ -79,6 +81,7 @@
             color: var(--text-bright);
         }
 
+        /* ── Status Pill ── */
         .status {
             display: flex;
             align-items: center;
@@ -126,6 +129,7 @@
             50% { opacity: 0; }
         }
 
+        /* ── Hero Logo ── */
         .hero {
             text-align: center;
             margin-bottom: 20px;
@@ -165,6 +169,7 @@
             97% { transform: translate(-2px, 2px); clip-path: inset(10% 0 70% 0); }
         }
 
+        /* ── Tagline ── */
         .tagline {
             text-align: center;
             font-size: 12px;
@@ -178,6 +183,7 @@
             color: var(--text);
         }
 
+        /* ── Section Headers ── */
         .section-header {
             display: flex;
             align-items: center;
@@ -198,6 +204,7 @@
             background: var(--border);
         }
 
+        /* ── Link Cards ── */
         .link-card {
             display: flex;
             align-items: center;
@@ -246,6 +253,7 @@
             color: var(--text);
         }
 
+        /* ── Filter Tags ── */
         .filters {
             display: flex;
             flex-wrap: wrap;
@@ -277,6 +285,7 @@
             color: var(--accent-red);
         }
 
+        /* ── Finding Cards ── */
         .finding-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -351,6 +360,7 @@
             gap: 5px;
         }
 
+        /* ── Cert Cards ── */
         .cert-card {
             display: flex;
             align-items: center;
@@ -398,6 +408,7 @@
             color: var(--text-dim);
         }
 
+        /* ── Tool Tags ── */
         .tools-grid {
             display: flex;
             flex-wrap: wrap;
@@ -421,6 +432,7 @@
             transform: translateY(-2px);
         }
 
+        /* ── Stats Row ── */
         .stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -455,6 +467,7 @@
             color: var(--text-dim);
         }
 
+        /* ── Footer ── */
         .footer {
             margin-top: 80px;
             padding-top: 30px;
@@ -469,6 +482,7 @@
             margin-top: 6px;
         }
 
+        /* ── Animations ── */
         .fade-in {
             opacity: 0;
             transform: translateY(16px);
@@ -490,6 +504,7 @@
         .delay-6 { animation-delay: 0.6s; }
         .delay-7 { animation-delay: 0.7s; }
 
+        /* ── Responsive ── */
         @media (max-width: 600px) {
             .container {
                 padding: 40px 16px 60px;
@@ -510,25 +525,30 @@
 <body>
     <div class="container">
 
+        <!-- Terminal Nav -->
         <nav class="nav fade-in">
-            <span>~</span> / <a href="#">home</a>
+            <span>~</span> / <a href="#">home</a> / <a href="writeups.html">writeups</a>
         </nav>
 
+        <!-- Status Pill -->
         <div class="status fade-in delay-1">
             <div class="status-pill">
                 <div class="status-dot"></div>
-                Hunting Bugs<span class="status-cursor"></span>
+                hunting bugs<span class="status-cursor"></span>
             </div>
         </div>
 
+        <!-- Hero -->
         <div class="hero fade-in delay-2">
             <div class="logo">0x4s3m</div>
         </div>
 
+        <!-- Tagline -->
         <p class="tagline fade-in delay-3">
-            // <span>In God's Hands</span>
+            // <span>breaking things to make them secure</span>
         </p>
 
+        <!-- Social Links -->
         <div class="fade-in delay-4">
             <a href="https://twitter.com/w_4nj" target="_blank" rel="noopener noreferrer" class="link-card">
                 <svg class="link-card-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
@@ -561,6 +581,7 @@
             </a>
         </div>
 
+        <!-- Stats -->
         <div class="section-header">STATS</div>
         <div class="stats fade-in">
             <div class="stat-card">
@@ -577,6 +598,7 @@
             </div>
         </div>
 
+        <!-- Findings -->
         <div class="section-header">NOTABLE FINDINGS</div>
 
         <div class="filters">
@@ -636,16 +658,9 @@
             </div>
         </div>
 
+        <!-- Certifications -->
         <div class="section-header">CERTIFICATIONS</div>
 
-        <div class="cert-card">
-            <div class="cert-icon">&gt;_</div>
-            <div class="cert-info">
-                <div class="cert-name">eWPTX</div>
-                <div class="cert-issuer">INE Security // eXtreme Web Application Penetration Testing</div>
-            </div>
-        </div>
-        
         <div class="cert-card">
             <div class="cert-icon">&gt;_</div>
             <div class="cert-info">
@@ -654,6 +669,23 @@
             </div>
         </div>
 
+        <div class="cert-card">
+            <div class="cert-icon">&gt;_</div>
+            <div class="cert-info">
+                <div class="cert-name">Bug Bounty Jr</div>
+                <div class="cert-issuer">Tuwaiq Academy // Bug Bounty Bootcamp</div>
+            </div>
+        </div>
+
+        <div class="cert-card">
+            <div class="cert-icon">&gt;_</div>
+            <div class="cert-info">
+                <div class="cert-name">eWPTX</div>
+                <div class="cert-issuer">INE Security // eXtreme Web Application Penetration Testing</div>
+            </div>
+        </div>
+
+        <!-- Working On -->
         <div class="section-header">WORKING ON</div>
 
         <div class="cert-card" style="border-color: rgba(255, 68, 68, 0.15);">
@@ -669,11 +701,12 @@
             <div class="cert-icon" style="color: var(--accent-red); border-color: rgba(255, 68, 68, 0.2); background: rgba(255, 68, 68, 0.05);">...</div>
             <div class="cert-info">
                 <div class="cert-name">CWES</div>
-                <div class="cert-issuer">HackTheBox // Certified Web Exploitation Specialist</div>
+                <div class="cert-issuer">HackTheBox // Certified Web Exploitation Specialist (formerly CBBH)</div>
             </div>
             <span class="severity high" style="font-size: 9px;">[IN PROGRESS]</span>
         </div>
 
+        <!-- Arsenal -->
         <div class="section-header">ARSENAL</div>
 
         <div class="filters">
@@ -703,6 +736,7 @@
             <span class="tool-tag" data-cat="util">Custom Scripts</span>
         </div>
 
+        <!-- Footer -->
         <footer class="footer">
             <p>&copy; 2026 0x4s3m</p>
             <p>ethical hacking & responsible disclosure</p>
@@ -711,11 +745,14 @@
     </div>
 
     <script>
+        // Findings filter
         function filterFindings(severity) {
             const cards = document.querySelectorAll('.finding-card');
             const buttons = document.querySelectorAll('.filters')[0].querySelectorAll('.filter-tag');
+
             buttons.forEach(b => b.classList.remove('active'));
             event.target.classList.add('active');
+
             cards.forEach(card => {
                 if (severity === 'all' || card.dataset.severity === severity) {
                     card.style.display = 'block';
@@ -725,11 +762,14 @@
             });
         }
 
+        // Tools filter
         function filterTools(cat) {
             const tags = document.querySelectorAll('#tools-grid .tool-tag');
             const buttons = document.querySelectorAll('.filters')[1].querySelectorAll('.filter-tag');
+
             buttons.forEach(b => b.classList.remove('active'));
             event.target.classList.add('active');
+
             tags.forEach(tag => {
                 if (cat === 'all' || tag.dataset.cat === cat) {
                     tag.style.display = 'inline-block';
@@ -739,6 +779,7 @@
             });
         }
 
+        // Intersection Observer for scroll animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
