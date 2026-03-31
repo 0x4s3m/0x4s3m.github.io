@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0x4s3m — Writeups</title>
+    <meta name="description" content="Security writeups and bug bounty findings by 0x4s3m">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a0a0a;
+            --bg-card: #111111;
+            --bg-card-hover: #161616;
+            --border: #1a1a1a;
+            --border-hover: #2a2a2a;
+            --text: #888888;
+            --text-bright: #cccccc;
+            --text-dim: #444444;
+            --accent-red: #ff4444;
+            --accent-green: #00ff9d;
+            --accent-cyan: #22d3ee;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        ::selection {
+            background: var(--accent-red);
+            color: #000;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 60px 24px 80px;
+        }
+
+        /* ── Nav ── */
+        .nav {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+
+        .nav span {
+            color: var(--accent-red);
+        }
+
+        .nav a {
+            color: var(--text-dim);
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: var(--text-bright);
+        }
+
+        .nav a.active {
+            color: var(--text-bright);
+        }
+
+        /* ── Page Header ── */
+        .page-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .page-title {
+            font-size: clamp(2rem, 6vw, 3rem);
+            font-weight: 700;
+            color: var(--text-bright);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .page-desc {
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+
+        .page-desc span {
+            color: var(--text);
+        }
+
+        /* ── Filters ── */
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 30px;
+        }
+
+        .filter-tag {
+            padding: 6px 14px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            cursor: pointer;
+            transition: all 0.3s;
+            background: transparent;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .filter-tag:hover {
+            border-color: var(--border-hover);
+            color: var(--text);
+        }
+
+        .filter-tag.active {
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+        }
+
+        /* ── Writeup Cards ── */
+        .writeup-card {
+            display: block;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 24px;
+            margin-bottom: 12px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .writeup-card:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-card-hover);
+            transform: translateX(4px);
+        }
+
+        .writeup-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .writeup-date {
+            font-size: 11px;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+        }
+
+        .writeup-tag {
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+
+        .writeup-tag.bugbounty {
+            color: var(--accent-green);
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            background: rgba(0, 255, 157, 0.08);
+        }
+
+        .writeup-tag.ctf {
+            color: var(--accent-cyan);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            background: rgba(34, 211, 238, 0.08);
+        }
+
+        .writeup-tag.research {
+            color: #c084fc;
+            border: 1px solid rgba(192, 132, 252, 0.3);
+            background: rgba(192, 132, 252, 0.08);
+        }
+
+        .writeup-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .writeup-excerpt {
+            font-size: 12px;
+            color: var(--text-dim);
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+
+        .writeup-footer {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 11px;
+            color: var(--text-dim);
+        }
+
+        .writeup-footer span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .writeup-arrow {
+            margin-left: auto;
+            color: var(--text-dim);
+            transition: transform 0.3s;
+        }
+
+        .writeup-card:hover .writeup-arrow {
+            transform: translateX(4px);
+            color: var(--text);
+        }
+
+        /* ── Footer ── */
+        .footer {
+            margin-top: 80px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+        }
+
+        .footer p + p {
+            margin-top: 6px;
+        }
+
+        /* ── Animations ── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(16px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 16px 60px;
+            }
+
+            .writeup-top {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- Nav -->
+        <nav class="nav fade-in">
+            <span>~</span> / <a href="index.html">home</a> / <a href="writeups.html" class="active">writeups</a>
+        </nav>
+
+        <!-- Page Header -->
+        <div class="page-header fade-in delay-1">
+            <h1 class="page-title">Writeups</h1>
+            <p class="page-desc">// <span>vulnerability research & exploitation walkthroughs</span></p>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters fade-in delay-2">
+            <button class="filter-tag active" onclick="filterWriteups('all')">[ALL]</button>
+            <button class="filter-tag" onclick="filterWriteups('bugbounty')">[BUG BOUNTY]</button>
+            <button class="filter-tag" onclick="filterWriteups('ctf')">[CTF]</button>
+            <button class="filter-tag" onclick="filterWriteups('research')">[RESEARCH]</button>
+        </div>
+
+        <!-- Writeups List -->
+        <div id="writeups-list" class="fade-in delay-3">
+
+            <a href="#" class="writeup-card" data-category="bugbounty">
+                <div class="writeup-top">
+                    <span class="writeup-date">// 2026</span>
+                    <span class="writeup-tag bugbounty">[BUG BOUNTY]</span>
+                </div>
+                <h2 class="writeup-title">Authentication Bypass via Broken Access Control</h2>
+                <p class="writeup-excerpt">Exploiting misconfigured role-based access control to escalate privileges and gain admin access to a production web application.</p>
+                <div class="writeup-footer">
+                    <span>// critical</span>
+                    <span>// web app</span>
+                    <span class="writeup-arrow">-></span>
+                </div>
+            </a>
+
+            <a href="#" class="writeup-card" data-category="bugbounty">
+                <div class="writeup-top">
+                    <span class="writeup-date">// 2026</span>
+                    <span class="writeup-tag bugbounty">[BUG BOUNTY]</span>
+                </div>
+                <h2 class="writeup-title">Chaining XSS + CSRF for Account Takeover</h2>
+                <p class="writeup-excerpt">Leveraging a stored XSS vulnerability combined with CSRF token bypass to achieve full account takeover on a major platform.</p>
+                <div class="writeup-footer">
+                    <span>// high</span>
+                    <span>// xss chain</span>
+                    <span class="writeup-arrow">-></span>
+                </div>
+            </a>
+
+            <a href="#" class="writeup-card" data-category="bugbounty">
+                <div class="writeup-top">
+                    <span class="writeup-date">// 2025</span>
+                    <span class="writeup-tag bugbounty">[BUG BOUNTY]</span>
+                </div>
+                <h2 class="writeup-title">SQL Injection to Database Dump via API</h2>
+                <p class="writeup-excerpt">Discovered a blind SQL injection in a REST API endpoint that allowed extracting the entire user database through time-based techniques.</p>
+                <div class="writeup-footer">
+                    <span>// high</span>
+                    <span>// sqli</span>
+                    <span class="writeup-arrow">-></span>
+                </div>
+            </a>
+
+            <a href="#" class="writeup-card" data-category="ctf">
+                <div class="writeup-top">
+                    <span class="writeup-date">// 2025</span>
+                    <span class="writeup-tag ctf">[CTF]</span>
+                </div>
+                <h2 class="writeup-title">HackTheBox — Web Challenge Walkthrough</h2>
+                <p class="writeup-excerpt">Step-by-step exploitation of a web challenge involving SSTI, filter bypass, and remote code execution to capture the flag.</p>
+                <div class="writeup-footer">
+                    <span>// ssti</span>
+                    <span>// rce</span>
+                    <span class="writeup-arrow">-></span>
+                </div>
+            </a>
+
+            <a href="#" class="writeup-card" data-category="research">
+                <div class="writeup-top">
+                    <span class="writeup-date">// 2025</span>
+                    <span class="writeup-tag research">[RESEARCH]</span>
+                </div>
+                <h2 class="writeup-title">IDOR Patterns in Modern REST APIs</h2>
+                <p class="writeup-excerpt">Research into common IDOR vulnerability patterns found across modern web applications and API architectures, with exploitation methodology.</p>
+                <div class="writeup-footer">
+                    <span>// idor</span>
+                    <span>// api security</span>
+                    <span class="writeup-arrow">-></span>
+                </div>
+            </a>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 0x4s3m</p>
+            <p>ethical hacking & responsible disclosure</p>
+        </footer>
+
+    </div>
+
+    <script>
+        function filterWriteups(category) {
+            const cards = document.querySelectorAll('.writeup-card');
+            const buttons = document.querySelectorAll('.filter-tag');
+
+            buttons.forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+
+            cards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.writeup-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(12px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
