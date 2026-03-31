@@ -14,7 +14,7 @@
             padding: 0;
             box-sizing: border-box;
         }
- 
+
         :root {
             --bg: #0a0a0a;
             --bg-card: #111111;
@@ -29,11 +29,11 @@
             --accent-cyan: #22d3ee;
             --accent-pink: #ff6b9d;
         }
- 
+
         html {
             scroll-behavior: smooth;
         }
- 
+
         body {
             font-family: 'JetBrains Mono', monospace;
             background: var(--bg);
@@ -42,53 +42,50 @@
             line-height: 1.6;
             font-size: 14px;
         }
- 
+
         ::selection {
             background: var(--accent-red);
             color: #000;
         }
- 
+
         a {
             color: inherit;
             text-decoration: none;
         }
- 
-        /* ── Layout ── */
+
         .container {
             max-width: 700px;
             margin: 0 auto;
             padding: 60px 24px 80px;
         }
- 
-        /* ── Terminal Nav ── */
+
         .nav {
             text-align: center;
             margin-bottom: 50px;
             font-size: 13px;
             letter-spacing: 1px;
         }
- 
+
         .nav span {
             color: var(--accent-red);
         }
- 
+
         .nav a {
             color: var(--text-dim);
             transition: color 0.3s;
         }
- 
+
         .nav a:hover {
             color: var(--text-bright);
         }
- 
-        /* ── Status Pill ── */
+
         .status {
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 50px;
         }
- 
+
         .status-pill {
             display: inline-flex;
             align-items: center;
@@ -101,7 +98,7 @@
             color: var(--text);
             letter-spacing: 0.5px;
         }
- 
+
         .status-dot {
             width: 8px;
             height: 8px;
@@ -109,12 +106,12 @@
             border-radius: 50%;
             animation: pulse-dot 2s ease-in-out infinite;
         }
- 
+
         @keyframes pulse-dot {
             0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.4); }
             50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(255, 68, 68, 0); }
         }
- 
+
         .status-cursor {
             display: inline-block;
             width: 2px;
@@ -123,18 +120,17 @@
             animation: blink 1s step-end infinite;
             vertical-align: middle;
         }
- 
+
         @keyframes blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
         }
- 
-        /* ── Hero Logo ── */
+
         .hero {
             text-align: center;
             margin-bottom: 20px;
         }
- 
+
         .logo {
             font-size: clamp(3rem, 10vw, 5.5rem);
             font-weight: 700;
@@ -148,7 +144,7 @@
                 0 0 20px rgba(255, 68, 68, 0.3),
                 0 0 60px rgba(255, 68, 68, 0.1);
         }
- 
+
         .logo::before {
             content: '0x4s3m';
             position: absolute;
@@ -161,15 +157,14 @@
             animation: glitch-1 4s infinite linear;
             clip-path: inset(0 0 0 0);
         }
- 
+
         @keyframes glitch-1 {
             0%, 92%, 100% { transform: translate(0); }
             93% { transform: translate(-3px, 1px); clip-path: inset(20% 0 60% 0); }
             95% { transform: translate(3px, -1px); clip-path: inset(50% 0 20% 0); }
             97% { transform: translate(-2px, 2px); clip-path: inset(10% 0 70% 0); }
         }
- 
-        /* ── Tagline ── */
+
         .tagline {
             text-align: center;
             font-size: 12px;
@@ -178,12 +173,11 @@
             color: var(--text-dim);
             margin-bottom: 60px;
         }
- 
+
         .tagline span {
             color: var(--text);
         }
- 
-        /* ── Section Headers ── */
+
         .section-header {
             display: flex;
             align-items: center;
@@ -195,7 +189,7 @@
             text-transform: uppercase;
             color: var(--text-dim);
         }
- 
+
         .section-header::before,
         .section-header::after {
             content: '';
@@ -203,8 +197,7 @@
             height: 1px;
             background: var(--border);
         }
- 
-        /* ── Link Cards ── */
+
         .link-card {
             display: flex;
             align-items: center;
@@ -217,50 +210,49 @@
             transition: all 0.3s ease;
             cursor: pointer;
         }
- 
+
         .link-card:hover {
             background: var(--bg-card-hover);
             border-color: var(--border-hover);
             transform: translateX(4px);
         }
- 
+
         .link-card-icon {
             width: 22px;
             height: 22px;
             color: var(--text-dim);
             flex-shrink: 0;
         }
- 
+
         .link-card:hover .link-card-icon {
             color: var(--text);
         }
- 
+
         .link-card-label {
             flex: 1;
             font-size: 14px;
             color: var(--text-bright);
             font-weight: 400;
         }
- 
+
         .link-card-arrow {
             color: var(--text-dim);
             font-size: 14px;
             transition: transform 0.3s;
         }
- 
+
         .link-card:hover .link-card-arrow {
             transform: translateX(4px);
             color: var(--text);
         }
- 
-        /* ── Filter Tags ── */
+
         .filters {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
             margin-bottom: 24px;
         }
- 
+
         .filter-tag {
             padding: 6px 14px;
             border: 1px solid var(--border);
@@ -274,18 +266,17 @@
             background: transparent;
             font-family: 'JetBrains Mono', monospace;
         }
- 
+
         .filter-tag:hover {
             border-color: var(--border-hover);
             color: var(--text);
         }
- 
+
         .filter-tag.active {
             border-color: var(--accent-red);
             color: var(--accent-red);
         }
- 
-        /* ── Finding Cards ── */
+
         .finding-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -294,25 +285,25 @@
             margin-bottom: 10px;
             transition: all 0.3s ease;
         }
- 
+
         .finding-card:hover {
             border-color: var(--border-hover);
             background: var(--bg-card-hover);
         }
- 
+
         .finding-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 10px;
         }
- 
+
         .finding-title {
             font-size: 14px;
             font-weight: 500;
             color: var(--text-bright);
         }
- 
+
         .severity {
             font-size: 10px;
             letter-spacing: 1px;
@@ -321,31 +312,31 @@
             border-radius: 3px;
             font-weight: 600;
         }
- 
+
         .severity.critical {
             color: #ff4444;
             border: 1px solid rgba(255, 68, 68, 0.3);
             background: rgba(255, 68, 68, 0.08);
         }
- 
+
         .severity.high {
             color: #ff8c44;
             border: 1px solid rgba(255, 140, 68, 0.3);
             background: rgba(255, 140, 68, 0.08);
         }
- 
+
         .severity.medium {
             color: #ffd444;
             border: 1px solid rgba(255, 212, 68, 0.3);
             background: rgba(255, 212, 68, 0.08);
         }
- 
+
         .finding-desc {
             font-size: 12px;
             color: var(--text-dim);
             line-height: 1.7;
         }
- 
+
         .finding-meta {
             display: flex;
             gap: 16px;
@@ -353,14 +344,13 @@
             font-size: 11px;
             color: var(--text-dim);
         }
- 
+
         .finding-meta span {
             display: flex;
             align-items: center;
             gap: 5px;
         }
- 
-        /* ── Cert Cards ── */
+
         .cert-card {
             display: flex;
             align-items: center;
@@ -372,12 +362,12 @@
             margin-bottom: 10px;
             transition: all 0.3s ease;
         }
- 
+
         .cert-card:hover {
             border-color: var(--border-hover);
             background: var(--bg-card-hover);
         }
- 
+
         .cert-icon {
             font-size: 11px;
             color: var(--accent-green);
@@ -391,30 +381,29 @@
             border-radius: 6px;
             background: rgba(0, 255, 157, 0.05);
         }
- 
+
         .cert-info {
             flex: 1;
         }
- 
+
         .cert-name {
             font-size: 13px;
             font-weight: 500;
             color: var(--text-bright);
             margin-bottom: 2px;
         }
- 
+
         .cert-issuer {
             font-size: 11px;
             color: var(--text-dim);
         }
- 
-        /* ── Tool Tags ── */
+
         .tools-grid {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
         }
- 
+
         .tool-tag {
             padding: 8px 16px;
             background: var(--bg-card);
@@ -424,22 +413,21 @@
             color: var(--text);
             transition: all 0.3s ease;
         }
- 
+
         .tool-tag:hover {
             border-color: var(--border-hover);
             color: var(--text-bright);
             background: var(--bg-card-hover);
             transform: translateY(-2px);
         }
- 
-        /* ── Stats Row ── */
+
         .stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             margin-bottom: 10px;
         }
- 
+
         .stat-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -448,26 +436,25 @@
             text-align: center;
             transition: all 0.3s;
         }
- 
+
         .stat-card:hover {
             border-color: var(--border-hover);
         }
- 
+
         .stat-number {
             font-size: 24px;
             font-weight: 700;
             color: var(--text-bright);
             margin-bottom: 4px;
         }
- 
+
         .stat-label {
             font-size: 10px;
             letter-spacing: 1px;
             text-transform: uppercase;
             color: var(--text-dim);
         }
- 
-        /* ── Footer ── */
+
         .footer {
             margin-top: 80px;
             padding-top: 30px;
@@ -477,25 +464,24 @@
             color: var(--text-dim);
             letter-spacing: 1px;
         }
- 
+
         .footer p + p {
             margin-top: 6px;
         }
- 
-        /* ── Animations ── */
+
         .fade-in {
             opacity: 0;
             transform: translateY(16px);
             animation: fadeIn 0.6s ease forwards;
         }
- 
+
         @keyframes fadeIn {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
- 
+
         .delay-1 { animation-delay: 0.1s; }
         .delay-2 { animation-delay: 0.2s; }
         .delay-3 { animation-delay: 0.3s; }
@@ -503,17 +489,16 @@
         .delay-5 { animation-delay: 0.5s; }
         .delay-6 { animation-delay: 0.6s; }
         .delay-7 { animation-delay: 0.7s; }
- 
-        /* ── Responsive ── */
+
         @media (max-width: 600px) {
             .container {
                 padding: 40px 16px 60px;
             }
- 
+
             .stats {
                 grid-template-columns: 1fr;
             }
- 
+
             .finding-header {
                 flex-direction: column;
                 align-items: flex-start;
@@ -524,64 +509,58 @@
 </head>
 <body>
     <div class="container">
- 
-        <!-- Terminal Nav -->
+
         <nav class="nav fade-in">
             <span>~</span> / <a href="#">home</a>
         </nav>
- 
-        <!-- Status Pill -->
+
         <div class="status fade-in delay-1">
             <div class="status-pill">
                 <div class="status-dot"></div>
                 hunting bugs<span class="status-cursor"></span>
             </div>
         </div>
- 
-        <!-- Hero -->
+
         <div class="hero fade-in delay-2">
             <div class="logo">0x4s3m</div>
         </div>
- 
-        <!-- Tagline -->
+
         <p class="tagline fade-in delay-3">
             // <span>breaking things to make them secure</span>
         </p>
- 
-        <!-- Social Links -->
+
         <div class="fade-in delay-4">
             <a href="https://twitter.com/w_4nj" target="_blank" rel="noopener noreferrer" class="link-card">
                 <svg class="link-card-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                 <span class="link-card-label">X (Twitter)</span>
                 <span class="link-card-arrow">-></span>
             </a>
- 
+
             <a href="https://github.com/0x4s3m" target="_blank" rel="noopener noreferrer" class="link-card">
                 <svg class="link-card-icon" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/></svg>
                 <span class="link-card-label">GitHub</span>
                 <span class="link-card-arrow">-></span>
             </a>
- 
+
             <a href="https://bugcrowd.com/h/0x4s3m" target="_blank" rel="noopener noreferrer" class="link-card">
                 <svg class="link-card-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
                 <span class="link-card-label">Bugcrowd</span>
                 <span class="link-card-arrow">-></span>
             </a>
- 
+
             <a href="https://app.hackthebox.com/users/3060841" target="_blank" rel="noopener noreferrer" class="link-card">
                 <svg class="link-card-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/></svg>
                 <span class="link-card-label">HackTheBox</span>
                 <span class="link-card-arrow">-></span>
             </a>
- 
+
             <a href="https://flagyard.com/profile/0x4s3m" target="_blank" rel="noopener noreferrer" class="link-card">
                 <svg class="link-card-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0l2.77-.693a9 9 0 016.208.682l.108.054a9 9 0 006.086.71l3.114-.732a48.524 48.524 0 01-.005-10.499l-3.11.732a9 9 0 01-6.085-.711l-.108-.054a9 9 0 00-6.208-.682L3 4.5M3 15V4.5"/></svg>
                 <span class="link-card-label">Flagyard</span>
                 <span class="link-card-arrow">-></span>
             </a>
         </div>
- 
-        <!-- Stats -->
+
         <div class="section-header">STATS</div>
         <div class="stats fade-in">
             <div class="stat-card">
@@ -597,17 +576,16 @@
                 <div class="stat-label">Certs</div>
             </div>
         </div>
- 
-        <!-- Findings -->
+
         <div class="section-header">NOTABLE FINDINGS</div>
- 
+
         <div class="filters">
             <button class="filter-tag active" onclick="filterFindings('all')">[ALL]</button>
             <button class="filter-tag" onclick="filterFindings('critical')">[CRITICAL]</button>
             <button class="filter-tag" onclick="filterFindings('high')">[HIGH]</button>
             <button class="filter-tag" onclick="filterFindings('medium')">[MEDIUM]</button>
         </div>
- 
+
         <div id="findings-list">
             <div class="finding-card" data-severity="critical">
                 <div class="finding-header">
@@ -620,7 +598,7 @@
                     <span>// web app</span>
                 </div>
             </div>
- 
+
             <div class="finding-card" data-severity="high">
                 <div class="finding-header">
                     <span class="finding-title">SQL Injection in API Endpoint</span>
@@ -632,7 +610,7 @@
                     <span>// data exposure</span>
                 </div>
             </div>
- 
+
             <div class="finding-card" data-severity="high">
                 <div class="finding-header">
                     <span class="finding-title">XSS Leading to Account Takeover</span>
@@ -644,7 +622,7 @@
                     <span>// account takeover</span>
                 </div>
             </div>
- 
+
             <div class="finding-card" data-severity="medium">
                 <div class="finding-header">
                     <span class="finding-title">IDOR in User Management</span>
@@ -657,18 +635,9 @@
                 </div>
             </div>
         </div>
- 
-        <!-- Certifications -->
+
         <div class="section-header">CERTIFICATIONS</div>
- 
-        <div class="cert-card">
-            <div class="cert-icon">&gt;_</div>
-            <div class="cert-info">
-                <div class="cert-name">eWPTX</div>
-                <div class="cert-issuer">INE Security // eXtreme Web Application Penetration Testing</div>
-            </div>
-        </div>
- 
+
         <div class="cert-card">
             <div class="cert-icon">&gt;_</div>
             <div class="cert-info">
@@ -676,7 +645,7 @@
                 <div class="cert-issuer">CyberWarfare Labs // Web Real-Time Attack</div>
             </div>
         </div>
- 
+
         <div class="cert-card">
             <div class="cert-icon">&gt;_</div>
             <div class="cert-info">
@@ -684,10 +653,37 @@
                 <div class="cert-issuer">Tuwaiq Academy // Bug Bounty Bootcamp</div>
             </div>
         </div>
- 
-        <!-- Arsenal -->
+
+        <div class="cert-card">
+            <div class="cert-icon">&gt;_</div>
+            <div class="cert-info">
+                <div class="cert-name">eWPTX</div>
+                <div class="cert-issuer">INE Security // eXtreme Web Application Penetration Testing</div>
+            </div>
+        </div>
+
+        <div class="section-header">WORKING ON</div>
+
+        <div class="cert-card" style="border-color: rgba(255, 68, 68, 0.15);">
+            <div class="cert-icon" style="color: var(--accent-red); border-color: rgba(255, 68, 68, 0.2); background: rgba(255, 68, 68, 0.05);">...</div>
+            <div class="cert-info">
+                <div class="cert-name">CPTS</div>
+                <div class="cert-issuer">HackTheBox // Certified Penetration Testing Specialist</div>
+            </div>
+            <span class="severity high" style="font-size: 9px;">[IN PROGRESS]</span>
+        </div>
+
+        <div class="cert-card" style="border-color: rgba(255, 68, 68, 0.15);">
+            <div class="cert-icon" style="color: var(--accent-red); border-color: rgba(255, 68, 68, 0.2); background: rgba(255, 68, 68, 0.05);">...</div>
+            <div class="cert-info">
+                <div class="cert-name">CWES</div>
+                <div class="cert-issuer">HackTheBox // Certified Web Exploitation Specialist (formerly CBBH)</div>
+            </div>
+            <span class="severity high" style="font-size: 9px;">[IN PROGRESS]</span>
+        </div>
+
         <div class="section-header">ARSENAL</div>
- 
+
         <div class="filters">
             <button class="filter-tag active" onclick="filterTools('all')">[ALL]</button>
             <button class="filter-tag" onclick="filterTools('recon')">[RECON]</button>
@@ -695,7 +691,7 @@
             <button class="filter-tag" onclick="filterTools('scan')">[SCAN]</button>
             <button class="filter-tag" onclick="filterTools('util')">[UTIL]</button>
         </div>
- 
+
         <div class="tools-grid" id="tools-grid">
             <span class="tool-tag" data-cat="exploit">Burp Suite</span>
             <span class="tool-tag" data-cat="scan">Nuclei</span>
@@ -714,24 +710,20 @@
             <span class="tool-tag" data-cat="util">Python</span>
             <span class="tool-tag" data-cat="util">Custom Scripts</span>
         </div>
- 
-        <!-- Footer -->
+
         <footer class="footer">
             <p>&copy; 2026 0x4s3m</p>
             <p>ethical hacking & responsible disclosure</p>
         </footer>
- 
+
     </div>
- 
+
     <script>
-        // Findings filter
         function filterFindings(severity) {
             const cards = document.querySelectorAll('.finding-card');
             const buttons = document.querySelectorAll('.filters')[0].querySelectorAll('.filter-tag');
- 
             buttons.forEach(b => b.classList.remove('active'));
             event.target.classList.add('active');
- 
             cards.forEach(card => {
                 if (severity === 'all' || card.dataset.severity === severity) {
                     card.style.display = 'block';
@@ -740,15 +732,12 @@
                 }
             });
         }
- 
-        // Tools filter
+
         function filterTools(cat) {
             const tags = document.querySelectorAll('#tools-grid .tool-tag');
             const buttons = document.querySelectorAll('.filters')[1].querySelectorAll('.filter-tag');
- 
             buttons.forEach(b => b.classList.remove('active'));
             event.target.classList.add('active');
- 
             tags.forEach(tag => {
                 if (cat === 'all' || tag.dataset.cat === cat) {
                     tag.style.display = 'inline-block';
@@ -757,8 +746,7 @@
                 }
             });
         }
- 
-        // Intersection Observer for scroll animations
+
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -767,7 +755,7 @@
                 }
             });
         }, { threshold: 0.1 });
- 
+
         document.querySelectorAll('.finding-card, .cert-card, .stat-card, .tool-tag').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(12px)';
