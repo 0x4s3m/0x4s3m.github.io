@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>0x4s3m — عنوان الرايت اب هنا</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+ 
+        :root {
+            --bg: #0a0a0a;
+            --bg-card: #111111;
+            --bg-card-hover: #161616;
+            --border: #1a1a1a;
+            --border-hover: #2a2a2a;
+            --text: #888888;
+            --text-bright: #cccccc;
+            --text-dim: #444444;
+            --accent-red: #ff4444;
+            --accent-green: #00ff9d;
+            --accent-cyan: #22d3ee;
+            --accent-orange: #ff8c44;
+            --accent-yellow: #ffd444;
+            --accent-purple: #c084fc;
+            --font-arabic: 'IBM Plex Sans Arabic', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+ 
+        html {
+            scroll-behavior: smooth;
+        }
+ 
+        body {
+            font-family: var(--font-arabic);
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.9;
+            font-size: 15px;
+        }
+ 
+        ::selection {
+            background: var(--accent-red);
+            color: #000;
+        }
+ 
+        a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+ 
+        a:hover {
+            color: var(--text-bright);
+        }
+ 
+        /* ── Layout ── */
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 60px 24px 80px;
+        }
+ 
+        /* ── Nav ── */
+        .nav {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 13px;
+            letter-spacing: 1px;
+            font-family: var(--font-mono);
+            direction: ltr;
+        }
+ 
+        .nav span {
+            color: var(--accent-red);
+        }
+ 
+        .nav a {
+            color: var(--text-dim);
+            transition: color 0.3s;
+        }
+ 
+        .nav a:hover {
+            color: var(--text-bright);
+        }
+ 
+        /* ── Article Header ── */
+        .article-header {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+ 
+        .article-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 24px;
+            font-family: var(--font-mono);
+        }
+ 
+        .article-date {
+            font-size: 11px;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+            direction: ltr;
+        }
+ 
+        .tag {
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 3px;
+            font-weight: 600;
+            font-family: var(--font-mono);
+            direction: ltr;
+        }
+ 
+        .tag.bugbounty {
+            color: var(--accent-green);
+            border: 1px solid rgba(0, 255, 157, 0.3);
+            background: rgba(0, 255, 157, 0.08);
+        }
+ 
+        .tag.ctf {
+            color: var(--accent-cyan);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            background: rgba(34, 211, 238, 0.08);
+        }
+ 
+        .tag.research {
+            color: var(--accent-purple);
+            border: 1px solid rgba(192, 132, 252, 0.3);
+            background: rgba(192, 132, 252, 0.08);
+        }
+ 
+        .tag.critical {
+            color: var(--accent-red);
+            border: 1px solid rgba(255, 68, 68, 0.3);
+            background: rgba(255, 68, 68, 0.08);
+        }
+ 
+        .tag.high {
+            color: var(--accent-orange);
+            border: 1px solid rgba(255, 140, 68, 0.3);
+            background: rgba(255, 140, 68, 0.08);
+        }
+ 
+        .tag.medium {
+            color: var(--accent-yellow);
+            border: 1px solid rgba(255, 212, 68, 0.3);
+            background: rgba(255, 212, 68, 0.08);
+        }
+ 
+        .article-title {
+            font-size: clamp(1.6rem, 4vw, 2.2rem);
+            font-weight: 700;
+            color: var(--text-bright);
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+ 
+        .article-summary {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 2;
+            padding-right: 16px;
+            border-right: 3px solid var(--accent-red);
+            text-align: right;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+ 
+        /* ── Article Content ── */
+        .content {
+            margin-top: 50px;
+        }
+ 
+        .content h2 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--text-bright);
+            margin-top: 50px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+ 
+        .content h2 .section-num {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--accent-red);
+            font-weight: 400;
+        }
+ 
+        .content h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-bright);
+            margin-top: 30px;
+            margin-bottom: 14px;
+        }
+ 
+        .content p {
+            font-size: 15px;
+            color: var(--text);
+            line-height: 2;
+            margin-bottom: 18px;
+        }
+ 
+        .content ul,
+        .content ol {
+            margin-bottom: 18px;
+            padding-right: 24px;
+        }
+ 
+        .content li {
+            font-size: 14px;
+            color: var(--text);
+            line-height: 2;
+            margin-bottom: 6px;
+        }
+ 
+        .content li::marker {
+            color: var(--accent-red);
+        }
+ 
+        .content strong {
+            color: var(--text-bright);
+            font-weight: 600;
+        }
+ 
+        /* ── Code Block ── */
+        .code-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 24px;
+            overflow: hidden;
+            direction: ltr;
+            text-align: left;
+        }
+ 
+        .code-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 18px;
+            background: rgba(255, 255, 255, 0.02);
+            border-bottom: 1px solid var(--border);
+        }
+ 
+        .code-lang {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+ 
+        .code-dots {
+            display: flex;
+            gap: 6px;
+        }
+ 
+        .code-dots span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border-hover);
+        }
+ 
+        .code-dots span:first-child {
+            background: #ff5f57;
+        }
+ 
+        .code-dots span:nth-child(2) {
+            background: #febc2e;
+        }
+ 
+        .code-dots span:last-child {
+            background: #28c840;
+        }
+ 
+        .code-body {
+            padding: 18px;
+            overflow-x: auto;
+        }
+ 
+        .code-body pre {
+            font-family: var(--font-mono);
+            font-size: 12.5px;
+            line-height: 1.8;
+            color: var(--text);
+            white-space: pre;
+            margin: 0;
+        }
+ 
+        /* Syntax colors */
+        .c-comment { color: var(--text-dim); }
+        .c-keyword { color: var(--accent-red); }
+        .c-string { color: var(--accent-green); }
+        .c-highlight { color: var(--accent-cyan); }
+        .c-number { color: var(--accent-orange); }
+        .c-func { color: var(--accent-purple); }
+ 
+        /* ── Inline Code ── */
+        code {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 2px 8px;
+            color: var(--accent-cyan);
+            direction: ltr;
+            display: inline-block;
+        }
+ 
+        /* ── Command Block (single command) ── */
+        .cmd-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 20px;
+            direction: ltr;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+ 
+        .cmd-prompt {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--accent-red);
+            flex-shrink: 0;
+            user-select: none;
+        }
+ 
+        .cmd-text {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: var(--text-bright);
+            white-space: nowrap;
+            overflow-x: auto;
+        }
+ 
+        /* ── Info Box ── */
+        .info-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-right: 3px solid var(--accent-red);
+            border-radius: 8px;
+            padding: 20px 22px;
+            margin-bottom: 24px;
+        }
+ 
+        .info-box.green {
+            border-right-color: var(--accent-green);
+        }
+ 
+        .info-box.cyan {
+            border-right-color: var(--accent-cyan);
+        }
+ 
+        .info-box.yellow {
+            border-right-color: var(--accent-yellow);
+        }
+ 
+        .info-box-title {
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--accent-red);
+            margin-bottom: 10px;
+            font-family: var(--font-mono);
+            direction: ltr;
+        }
+ 
+        .info-box.green .info-box-title {
+            color: var(--accent-green);
+        }
+ 
+        .info-box.cyan .info-box-title {
+            color: var(--accent-cyan);
+        }
+ 
+        .info-box.yellow .info-box-title {
+            color: var(--accent-yellow);
+        }
+ 
+        .info-box p {
+            font-size: 13px;
+            color: var(--text);
+            line-height: 1.9;
+            margin-bottom: 0;
+        }
+ 
+        /* ── Steps List ── */
+        .steps {
+            counter-reset: step;
+            list-style: none;
+            padding: 0;
+            margin-bottom: 24px;
+        }
+ 
+        .steps li {
+            counter-increment: step;
+            position: relative;
+            padding-right: 50px;
+            margin-bottom: 18px;
+            font-size: 14px;
+            color: var(--text);
+            line-height: 1.9;
+        }
+ 
+        .steps li::before {
+            content: counter(step, decimal-leading-zero);
+            position: absolute;
+            right: 0;
+            top: 2px;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent-red);
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255, 68, 68, 0.2);
+            border-radius: 6px;
+            background: rgba(255, 68, 68, 0.05);
+        }
+ 
+        /* ── Image ── */
+        .img-wrapper {
+            margin-bottom: 24px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+ 
+        .img-wrapper img {
+            width: 100%;
+            display: block;
+        }
+ 
+        .img-caption {
+            padding: 10px 16px;
+            font-size: 11px;
+            color: var(--text-dim);
+            background: var(--bg-card);
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-family: var(--font-mono);
+        }
+ 
+        /* ── Table ── */
+        .table-wrapper {
+            overflow-x: auto;
+            margin-bottom: 24px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+        }
+ 
+        .table-wrapper table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+ 
+        .table-wrapper th {
+            background: var(--bg-card);
+            color: var(--text-bright);
+            font-weight: 600;
+            padding: 12px 16px;
+            text-align: right;
+            border-bottom: 1px solid var(--border);
+            font-size: 12px;
+        }
+ 
+        .table-wrapper td {
+            padding: 10px 16px;
+            border-bottom: 1px solid var(--border);
+            color: var(--text);
+        }
+ 
+        .table-wrapper tr:last-child td {
+            border-bottom: none;
+        }
+ 
+        .table-wrapper tr:hover td {
+            background: var(--bg-card);
+        }
+ 
+        /* ── Divider ── */
+        .divider {
+            height: 1px;
+            background: var(--border);
+            margin: 50px 0;
+        }
+ 
+        /* ── Back Link ── */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-top: 40px;
+            font-family: var(--font-mono);
+            direction: ltr;
+            transition: color 0.3s;
+        }
+ 
+        .back-link:hover {
+            color: var(--text-bright);
+        }
+ 
+        /* ── Footer ── */
+        .footer {
+            margin-top: 80px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+            font-family: var(--font-mono);
+            direction: ltr;
+        }
+ 
+        .footer p + p {
+            margin-top: 6px;
+        }
+ 
+        /* ── Animations ── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(16px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+ 
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+ 
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+ 
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 16px 60px;
+            }
+ 
+            .article-meta {
+                flex-direction: column;
+            }
+ 
+            .code-body pre {
+                font-size: 11px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+ 
+        <!-- Nav -->
+        <nav class="nav fade-in">
+            <span>~</span> / <a href="../index.html">home</a> / <a href="../writeups.html">writeups</a> / <span>auth-bypass</span>
+        </nav>
+ 
+        <!-- ═══════════════════════════════════════════ -->
+        <!-- غير العنوان والتاريخ والتاقز حسب الرايت اب -->
+        <!-- ═══════════════════════════════════════════ -->
+ 
+        <!-- Article Header -->
+        <div class="article-header fade-in delay-1">
+            <div class="article-meta">
+                <span class="article-date">// 2026-03-15</span>
+                <span class="tag bugbounty">[BUG BOUNTY]</span>
+                <span class="tag critical">[CRITICAL]</span>
+            </div>
+            <h1 class="article-title">عنوان الرايت اب هنا</h1>
+            <p class="article-summary">
+                وصف مختصر للثغرة أو التحدي هنا. يظهر بخط أحمر على اليمين كملخص سريع للقارئ.
+            </p>
+        </div>
+ 
+        <!-- ═══════════════════════════════ -->
+        <!--       محتوى الرايت اب          -->
+        <!-- ═══════════════════════════════ -->
+ 
+        <div class="content fade-in delay-2">
+ 
+            <!-- ────── عنوان قسم ────── -->
+            <h2><span class="section-num">01 //</span> نظرة عامة</h2>
+            <p>
+                اكتب هنا مقدمة عن الثغرة أو التحدي. وصف عام للهدف وكيف وصلت له.
+                تقدر تستخدم <code>كود انلاين</code> داخل النص بهالشكل.
+            </p>
+ 
+            <!-- ────── صندوق تنبيه أحمر ────── -->
+            <div class="info-box">
+                <div class="info-box-title">// تنبيه</div>
+                <p>تم الإبلاغ عن هذه الثغرة بشكل مسؤول من خلال برنامج المكافآت الرسمي. جميع التفاصيل الحساسة تم إخفاءها.</p>
+            </div>
+ 
+            <!-- ────── عنوان قسم ثاني ────── -->
+            <h2><span class="section-num">02 //</span> الاستطلاع</h2>
+            <p>
+                اكتب هنا خطوات الاستطلاع والـ Recon اللي سويتها. اشرح كيف بديت تفحص التطبيق وايش لقيت.
+            </p>
+ 
+            <!-- ────── كود أمر واحد ────── -->
+            <div class="cmd-block">
+                <span class="cmd-prompt">$</span>
+                <span class="cmd-text">nmap -sV -sC -p- target.com</span>
+            </div>
+ 
+            <p>
+                بعد ما سويت سكان على البورتات لقيت إن البورت 8080 مفتوح وعليه API endpoint.
+            </p>
+ 
+            <!-- ────── كود أمر ثاني ────── -->
+            <div class="cmd-block">
+                <span class="cmd-prompt">$</span>
+                <span class="cmd-text">ffuf -u https://target.com/api/FUZZ -w wordlist.txt -mc 200</span>
+            </div>
+ 
+            <!-- ────── بلوك كود كامل ────── -->
+            <h2><span class="section-num">03 //</span> الاكتشاف</h2>
+            <p>
+                لما فحصت الـ API requests في Burp Suite لقيت إن السيرفر يقبل هيدر مخصص:
+            </p>
+ 
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="code-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <span class="code-lang">HTTP Request</span>
+                </div>
+                <div class="code-body">
+                    <pre><span class="c-keyword">GET</span> /api/v1/admin/users <span class="c-highlight">HTTP/1.1</span>
+<span class="c-comment">Host: app.redacted.com</span>
+<span class="c-comment">Authorization: Bearer eyJ...</span>
+<span class="c-string">X-User-Role: admin</span>
+ 
+<span class="c-keyword">Response: 200 OK</span>
+<span class="c-string">{"users": [{"id": 1, "email": "admin@redacted.com"}, ...]}</span></pre>
+                </div>
+            </div>
+ 
+            <p>
+                بمجرد إضافة الهيدر <code>X-User-Role: admin</code> السيرفر تجاوز التحقق من الصلاحيات وأعطاني وصول كامل.
+            </p>
+ 
+            <!-- ────── بلوك كود Python ────── -->
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="code-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <span class="code-lang">Python</span>
+                </div>
+                <div class="code-body">
+                    <pre><span class="c-keyword">import</span> requests
+ 
+url = <span class="c-string">"https://app.redacted.com/api/v1/admin/users"</span>
+headers = {
+    <span class="c-string">"Authorization"</span>: <span class="c-string">"Bearer eyJ..."</span>,
+    <span class="c-string">"X-User-Role"</span>: <span class="c-string">"admin"</span>
+}
+ 
+response = requests.<span class="c-func">get</span>(url, headers=headers)
+<span class="c-keyword">print</span>(response.<span class="c-func">json</span>())</pre>
+                </div>
+            </div>
+ 
+            <!-- ────── بلوك كود Bash ────── -->
+            <div class="code-block">
+                <div class="code-header">
+                    <div class="code-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <span class="code-lang">Bash</span>
+                </div>
+                <div class="code-body">
+                    <pre><span class="c-comment"># استخراج بيانات المستخدمين</span>
+curl -s <span class="c-string">"https://app.redacted.com/api/v1/admin/users"</span> \
+  -H <span class="c-string">"Authorization: Bearer eyJ..."</span> \
+  -H <span class="c-string">"X-User-Role: admin"</span> | jq <span class="c-string">'.'</span></pre>
+                </div>
+            </div>
+ 
+            <!-- ────── التأثير ────── -->
+            <h2><span class="section-num">04 //</span> التأثير</h2>
+            <p>
+                هذي الثغرة كان تأثيرها <strong>خطير جدا</strong> لأنها تسمح لأي مستخدم عادي يوصل لصلاحيات الأدمن الكاملة:
+            </p>
+ 
+            <ul>
+                <li>الوصول لقاعدة بيانات المستخدمين كاملة</li>
+                <li>تعديل إعدادات التطبيق</li>
+                <li>حذف أو تعديل حسابات المستخدمين</li>
+                <li>إمكانية تنفيذ أوامر على السيرفر من خلال لوحة التحكم</li>
+            </ul>
+ 
+            <!-- ────── صندوق معلومات أخضر ────── -->
+            <div class="info-box green">
+                <div class="info-box-title">// ملاحظة</div>
+                <p>تقدر تستخدم صناديق المعلومات بألوان مختلفة: أحمر (افتراضي)، أخضر (green)، سماوي (cyan)، أصفر (yellow).</p>
+            </div>
+ 
+            <!-- ────── جدول ────── -->
+            <h2><span class="section-num">05 //</span> التفاصيل التقنية</h2>
+ 
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>العنصر</th>
+                            <th>التفاصيل</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>نوع الثغرة</strong></td>
+                            <td>Broken Access Control</td>
+                        </tr>
+                        <tr>
+                            <td><strong>الخطورة</strong></td>
+                            <td>Critical (CVSS 9.8)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>المكون المتأثر</strong></td>
+                            <td>/api/v1/admin/*</td>
+                        </tr>
+                        <tr>
+                            <td><strong>المتطلبات</strong></td>
+                            <td>حساب مستخدم عادي فقط</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+ 
+            <!-- ────── خطوات مرقمة ────── -->
+            <h2><span class="section-num">06 //</span> خطوات الاستغلال</h2>
+ 
+            <ol class="steps">
+                <li>سجل دخول بحساب مستخدم عادي واحصل على الـ JWT Token</li>
+                <li>افتح Burp Suite واعترض أي طلب API</li>
+                <li>أضف الهيدر <code>X-User-Role: admin</code> للطلب</li>
+                <li>أرسل الطلب لـ <code>/api/v1/admin/users</code></li>
+                <li>راح تحصل على رد 200 OK مع بيانات جميع المستخدمين</li>
+            </ol>
+ 
+            <!-- ────── صندوق سماوي ────── -->
+            <div class="info-box cyan">
+                <div class="info-box-title">// نصيحة</div>
+                <p>دائما اختبر الهيدرز المخصصة وتلاعب بالبارمترز عند فحص آليات التحكم بالوصول. كثير من التطبيقات تعتمد على هيدرز من جانب العميل بدل التحقق من السيرفر.</p>
+            </div>
+ 
+            <!-- ────── الحل ────── -->
+            <h2><span class="section-num">07 //</span> التوصيات</h2>
+ 
+            <ol>
+                <li>إزالة التحقق من الهيدر المخصص <code>X-User-Role</code> نهائيا</li>
+                <li>الاعتماد فقط على التحقق من الـ JWT من جانب السيرفر</li>
+                <li>تطبيق RBAC middleware لا يمكن تجاوزه</li>
+                <li>إضافة مراقبة وتنبيهات لمحاولات رفع الصلاحيات</li>
+            </ol>
+ 
+            <!-- ────── صندوق أصفر - Timeline ────── -->
+            <div class="info-box yellow">
+                <div class="info-box-title">// الجدول الزمني</div>
+                <p>
+                    الإبلاغ: 2026-03-10 &mdash;
+                    الفرز: 2026-03-11 &mdash;
+                    الإصلاح: 2026-03-14 &mdash;
+                    المكافأة: 2026-03-15
+                </p>
+            </div>
+ 
+            <!-- ────── الخلاصة ────── -->
+            <h2><span class="section-num">08 //</span> الخلاصة</h2>
+            <p>
+                لا تثق أبدا ببيانات من جانب العميل لاتخاذ قرارات الصلاحيات. التحقق من الأدوار لازم يكون من جانب السيرفر باستخدام claims موثقة من التوكن، مو هيدرز يتحكم فيها المستخدم.
+            </p>
+ 
+            <!-- ────── مكان الصورة (اختياري) ────── -->
+            <!--
+            <div class="img-wrapper">
+                <img src="../images/screenshot.png" alt="وصف الصورة">
+                <div class="img-caption">// وصف الصورة هنا</div>
+            </div>
+            -->
+ 
+            <div class="divider"></div>
+ 
+            <a href="../writeups.html" class="back-link">
+                <- back to writeups
+            </a>
+        </div>
+ 
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 0x4s3m</p>
+            <p>ethical hacking & responsible disclosure</p>
+        </footer>
+ 
+    </div>
+</body>
+</html>
