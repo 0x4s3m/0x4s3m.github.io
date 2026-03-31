@@ -3,468 +3,768 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>0x4s3m - Security Researcher</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title>0x4s3m — Security Researcher</title>
+    <meta name="description" content="0x4s3m — Web Pentester, Bug Bounty Hunter & Cybersecurity Researcher">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
+        *, *::before, *::after {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+ 
+        :root {
+            --bg: #0a0a0a;
+            --bg-card: #111111;
+            --bg-card-hover: #161616;
+            --border: #1a1a1a;
+            --border-hover: #2a2a2a;
+            --text: #888888;
+            --text-bright: #cccccc;
+            --text-dim: #444444;
+            --accent-red: #ff4444;
+            --accent-green: #00ff9d;
+            --accent-cyan: #22d3ee;
+            --accent-pink: #ff6b9d;
+        }
+ 
+        html {
+            scroll-behavior: smooth;
+        }
+ 
         body {
-            font-family: 'Inter', sans-serif;
-            background: #0a0e14;
-            color: #e5e7eb;
-            overflow-x: hidden;
-        }
-
-        .mono {
             font-family: 'JetBrains Mono', monospace;
+            background: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+            line-height: 1.6;
+            font-size: 14px;
         }
-
-        /* Scanline background effect */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: 
-                repeating-linear-gradient(
-                    0deg,
-                    rgba(0, 0, 0, 0.05),
-                    rgba(0, 0, 0, 0.05) 1px,
-                    transparent 1px,
-                    transparent 2px
-                );
-            pointer-events: none;
-            z-index: 1;
-            opacity: 0.3;
+ 
+        ::selection {
+            background: var(--accent-red);
+            color: #000;
         }
-
-        /* Faint grid */
-        body::after {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(rgba(34, 211, 238, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(34, 211, 238, 0.03) 1px, transparent 1px);
-            background-size: 50px 50px;
-            pointer-events: none;
-            z-index: 1;
+ 
+        a {
+            color: inherit;
+            text-decoration: none;
         }
-
+ 
+        /* ── Layout ── */
         .container {
-            position: relative;
-            z-index: 2;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 60px 24px 80px;
         }
-
-        /* Glitch effect for hero name */
-        .glitch {
+ 
+        /* ── Terminal Nav ── */
+        .nav {
+            text-align: center;
+            margin-bottom: 50px;
+            font-size: 13px;
+            letter-spacing: 1px;
+        }
+ 
+        .nav span {
+            color: var(--accent-red);
+        }
+ 
+        .nav a {
+            color: var(--text-dim);
+            transition: color 0.3s;
+        }
+ 
+        .nav a:hover {
+            color: var(--text-bright);
+        }
+ 
+        /* ── Status Pill ── */
+        .status {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 50px;
+        }
+ 
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 22px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 13px;
+            color: var(--text);
+            letter-spacing: 0.5px;
+        }
+ 
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent-red);
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+ 
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.4); }
+            50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(255, 68, 68, 0); }
+        }
+ 
+        .status-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 16px;
+            background: var(--text-dim);
+            animation: blink 1s step-end infinite;
+            vertical-align: middle;
+        }
+ 
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+ 
+        /* ── Hero Logo ── */
+        .hero {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+ 
+        .logo {
+            font-size: clamp(3rem, 10vw, 5.5rem);
+            font-weight: 700;
+            color: var(--text-bright);
+            letter-spacing: 4px;
+            line-height: 1.1;
             position: relative;
             display: inline-block;
-            font-size: 4rem;
-            font-weight: 700;
-            color: #22d3ee;
-            text-shadow: 
-                0 0 10px rgba(34, 211, 238, 0.5),
-                0 0 20px rgba(34, 211, 238, 0.3);
+            text-transform: uppercase;
+            text-shadow:
+                0 0 20px rgba(255, 68, 68, 0.3),
+                0 0 60px rgba(255, 68, 68, 0.1);
         }
-
-        @keyframes glitch-anim {
-            0% {
-                clip-path: inset(40% 0 61% 0);
-                transform: translate(0);
-            }
-            20% {
-                clip-path: inset(92% 0 1% 0);
-                transform: translate(-2px, 2px);
-            }
-            40% {
-                clip-path: inset(43% 0 1% 0);
-                transform: translate(-2px, -2px);
-            }
-            60% {
-                clip-path: inset(25% 0 58% 0);
-                transform: translate(2px, 2px);
-            }
-            80% {
-                clip-path: inset(54% 0 7% 0);
-                transform: translate(2px, -2px);
-            }
-            100% {
-                clip-path: inset(58% 0 43% 0);
-                transform: translate(0);
-            }
-        }
-
-        .glitch::before,
-        .glitch::after {
+ 
+        .logo::before {
             content: '0x4s3m';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-        }
-
-        .glitch::before {
-            color: #00ff9d;
-            animation: glitch-anim 3s infinite linear alternate-reverse;
+            color: var(--accent-red);
+            opacity: 0.08;
+            animation: glitch-1 4s infinite linear;
             clip-path: inset(0 0 0 0);
         }
-
-        .glitch::after {
-            color: #22d3ee;
-            animation: glitch-anim 2s infinite linear alternate;
-            clip-path: inset(0 0 0 0);
+ 
+        @keyframes glitch-1 {
+            0%, 92%, 100% { transform: translate(0); }
+            93% { transform: translate(-3px, 1px); clip-path: inset(20% 0 60% 0); }
+            95% { transform: translate(3px, -1px); clip-path: inset(50% 0 20% 0); }
+            97% { transform: translate(-2px, 2px); clip-path: inset(10% 0 70% 0); }
         }
-
-        /* Card hover effects */
-        .card {
-            background: #111827;
-            border: 1px solid rgba(34, 211, 238, 0.1);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+ 
+        /* ── Tagline ── */
+        .tagline {
+            text-align: center;
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            margin-bottom: 60px;
         }
-
-        .card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(34, 211, 238, 0.5);
-            box-shadow: 
-                0 0 30px rgba(34, 211, 238, 0.2),
-                0 20px 60px rgba(0, 0, 0, 0.5);
+ 
+        .tagline span {
+            color: var(--text);
         }
-
-        /* Badge glow */
-        .badge {
-            background: rgba(34, 211, 238, 0.1);
-            border: 1px solid rgba(34, 211, 238, 0.3);
-            transition: all 0.3s ease;
+ 
+        /* ── Section Headers ── */
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+            margin-top: 70px;
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-dim);
         }
-
-        .badge:hover {
-            background: rgba(34, 211, 238, 0.2);
-            border-color: #22d3ee;
-            box-shadow: 0 0 20px rgba(34, 211, 238, 0.4);
-            transform: scale(1.05);
-        }
-
-        /* Platform badge */
-        .platform-badge {
-            background: rgba(17, 24, 39, 0.8);
-            border: 1px solid rgba(34, 211, 238, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        .platform-badge:hover {
-            background: rgba(34, 211, 238, 0.15);
-            border-color: #22d3ee;
-            box-shadow: 0 0 20px rgba(34, 211, 238, 0.3);
-            transform: translateY(-3px);
-        }
-
-        /* Accent badge */
-        .accent-badge {
-            background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(0, 255, 157, 0.2));
-            border: 1px solid rgba(0, 255, 157, 0.5);
-            box-shadow: 
-                0 0 15px rgba(0, 255, 157, 0.3),
-                inset 0 0 15px rgba(0, 255, 157, 0.1);
-        }
-
-        /* Link hover */
-        .link-hover {
-            position: relative;
-            transition: color 0.3s ease;
-        }
-
-        .link-hover::after {
+ 
+        .section-header::before,
+        .section-header::after {
             content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #22d3ee, #00ff9d);
-            transition: width 0.3s ease;
+            flex: 1;
+            height: 1px;
+            background: var(--border);
         }
-
-        .link-hover:hover::after {
-            width: 100%;
+ 
+        /* ── Link Cards ── */
+        .link-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 18px 22px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
-
-        .link-hover:hover {
-            color: #22d3ee;
+ 
+        .link-card:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--border-hover);
+            transform: translateX(4px);
         }
-
-        /* Tool tags */
+ 
+        .link-card-icon {
+            width: 22px;
+            height: 22px;
+            color: var(--text-dim);
+            flex-shrink: 0;
+        }
+ 
+        .link-card:hover .link-card-icon {
+            color: var(--text);
+        }
+ 
+        .link-card-label {
+            flex: 1;
+            font-size: 14px;
+            color: var(--text-bright);
+            font-weight: 400;
+        }
+ 
+        .link-card-arrow {
+            color: var(--text-dim);
+            font-size: 14px;
+            transition: transform 0.3s;
+        }
+ 
+        .link-card:hover .link-card-arrow {
+            transform: translateX(4px);
+            color: var(--text);
+        }
+ 
+        /* ── Filter Tags ── */
+        .filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+ 
+        .filter-tag {
+            padding: 6px 14px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            cursor: pointer;
+            transition: all 0.3s;
+            background: transparent;
+            font-family: 'JetBrains Mono', monospace;
+        }
+ 
+        .filter-tag:hover {
+            border-color: var(--border-hover);
+            color: var(--text);
+        }
+ 
+        .filter-tag.active {
+            border-color: var(--accent-red);
+            color: var(--accent-red);
+        }
+ 
+        /* ── Finding Cards ── */
+        .finding-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 22px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+ 
+        .finding-card:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-card-hover);
+        }
+ 
+        .finding-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+ 
+        .finding-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-bright);
+        }
+ 
+        .severity {
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+ 
+        .severity.critical {
+            color: #ff4444;
+            border: 1px solid rgba(255, 68, 68, 0.3);
+            background: rgba(255, 68, 68, 0.08);
+        }
+ 
+        .severity.high {
+            color: #ff8c44;
+            border: 1px solid rgba(255, 140, 68, 0.3);
+            background: rgba(255, 140, 68, 0.08);
+        }
+ 
+        .severity.medium {
+            color: #ffd444;
+            border: 1px solid rgba(255, 212, 68, 0.3);
+            background: rgba(255, 212, 68, 0.08);
+        }
+ 
+        .finding-desc {
+            font-size: 12px;
+            color: var(--text-dim);
+            line-height: 1.7;
+        }
+ 
+        .finding-meta {
+            display: flex;
+            gap: 16px;
+            margin-top: 12px;
+            font-size: 11px;
+            color: var(--text-dim);
+        }
+ 
+        .finding-meta span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+ 
+        /* ── Cert Cards ── */
+        .cert-card {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 18px 22px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+ 
+        .cert-card:hover {
+            border-color: var(--border-hover);
+            background: var(--bg-card-hover);
+        }
+ 
+        .cert-icon {
+            font-size: 11px;
+            color: var(--accent-green);
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(0, 255, 157, 0.2);
+            border-radius: 6px;
+            background: rgba(0, 255, 157, 0.05);
+        }
+ 
+        .cert-info {
+            flex: 1;
+        }
+ 
+        .cert-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-bright);
+            margin-bottom: 2px;
+        }
+ 
+        .cert-issuer {
+            font-size: 11px;
+            color: var(--text-dim);
+        }
+ 
+        /* ── Tool Tags ── */
+        .tools-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+ 
         .tool-tag {
-            background: rgba(17, 24, 39, 0.8);
-            border: 1px solid rgba(34, 211, 238, 0.2);
+            padding: 8px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            font-size: 12px;
+            color: var(--text);
             transition: all 0.3s ease;
         }
-
+ 
         .tool-tag:hover {
-            border-color: #22d3ee;
-            background: rgba(34, 211, 238, 0.1);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(34, 211, 238, 0.2);
+            border-color: var(--border-hover);
+            color: var(--text-bright);
+            background: var(--bg-card-hover);
+            transform: translateY(-2px);
         }
-
-        /* Social icons */
-        .social-icon {
-            transition: all 0.3s ease;
+ 
+        /* ── Stats Row ── */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 10px;
         }
-
-        .social-icon:hover {
-            color: #22d3ee;
-            transform: scale(1.1);
-            filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.6));
+ 
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s;
         }
-
-        /* Amount badge */
-        .amount-badge {
-            background: linear-gradient(135deg, rgba(0, 255, 157, 0.15), rgba(34, 211, 238, 0.15));
-            border: 1px solid rgba(0, 255, 157, 0.4);
-            color: #00ff9d;
-            text-shadow: 0 0 10px rgba(0, 255, 157, 0.3);
+ 
+        .stat-card:hover {
+            border-color: var(--border-hover);
         }
-
-        @media (max-width: 768px) {
-            .glitch {
-                font-size: 2.5rem;
+ 
+        .stat-number {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-bright);
+            margin-bottom: 4px;
+        }
+ 
+        .stat-label {
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+ 
+        /* ── Footer ── */
+        .footer {
+            margin-top: 80px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+        }
+ 
+        .footer p + p {
+            margin-top: 6px;
+        }
+ 
+        /* ── Animations ── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(16px);
+            animation: fadeIn 0.6s ease forwards;
+        }
+ 
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+ 
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+        .delay-7 { animation-delay: 0.7s; }
+ 
+        /* ── Responsive ── */
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 16px 60px;
+            }
+ 
+            .stats {
+                grid-template-columns: 1fr;
+            }
+ 
+            .finding-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container max-w-6xl mx-auto px-6 py-16">
-        <!-- Hero Section -->
-        <header class="min-h-screen flex flex-col justify-center items-center text-center" data-aos="fade-up">
-            <div class="mb-8">
-                <h1 class="glitch mono">0x4s3m</h1>
+    <div class="container">
+ 
+        <!-- Terminal Nav -->
+        <nav class="nav fade-in">
+            <span>~</span> / <a href="#">home</a>
+        </nav>
+ 
+        <!-- Status Pill -->
+        <div class="status fade-in delay-1">
+            <div class="status-pill">
+                <div class="status-dot"></div>
+                hunting bugs<span class="status-cursor"></span>
             </div>
-            <p class="text-xl md:text-2xl text-gray-300 mb-6 font-light">
-                Bug Bounty Hunter <span class="text-cyan-400">•</span> Pentester <span class="text-cyan-400">•</span> Security Researcher
-            </p>
-            <div class="accent-badge inline-block px-8 py-3 rounded-full mb-12 mono text-sm md:text-base font-medium">
-                <span class="text-emerald-300">Active</span> <span class="text-gray-400">on multiple platforms</span>
+        </div>
+ 
+        <!-- Hero -->
+        <div class="hero fade-in delay-2">
+            <div class="logo">0x4s3m</div>
+        </div>
+ 
+        <!-- Tagline -->
+        <p class="tagline fade-in delay-3">
+            // <span>breaking things to make them secure</span>
+        </p>
+ 
+        <!-- Social Links -->
+        <div class="fade-in delay-4">
+            <a href="https://twitter.com/w_4nj" target="_blank" rel="noopener noreferrer" class="link-card">
+                <svg class="link-card-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                <span class="link-card-label">X (Twitter)</span>
+                <span class="link-card-arrow">-></span>
+            </a>
+ 
+            <a href="https://github.com/0x4s3m" target="_blank" rel="noopener noreferrer" class="link-card">
+                <svg class="link-card-icon" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/></svg>
+                <span class="link-card-label">GitHub</span>
+                <span class="link-card-arrow">-></span>
+            </a>
+ 
+            <a href="https://bugcrowd.com/h/0x4s3m" target="_blank" rel="noopener noreferrer" class="link-card">
+                <svg class="link-card-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                <span class="link-card-label">Bugcrowd</span>
+                <span class="link-card-arrow">-></span>
+            </a>
+ 
+            <a href="https://app.hackthebox.com/users/3060841" target="_blank" rel="noopener noreferrer" class="link-card">
+                <svg class="link-card-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 7.5l-9-5.25L3 7.5m18 0l-9 5.25m9-5.25v9l-9 5.25M3 7.5l9 5.25M3 7.5v9l9 5.25m0-9v9"/></svg>
+                <span class="link-card-label">HackTheBox</span>
+                <span class="link-card-arrow">-></span>
+            </a>
+ 
+            <a href="https://flagyard.com/profile/0x4s3m" target="_blank" rel="noopener noreferrer" class="link-card">
+                <svg class="link-card-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3v1.5M3 21v-6m0 0l2.77-.693a9 9 0 016.208.682l.108.054a9 9 0 006.086.71l3.114-.732a48.524 48.524 0 01-.005-10.499l-3.11.732a9 9 0 01-6.085-.711l-.108-.054a9 9 0 00-6.208-.682L3 4.5M3 15V4.5"/></svg>
+                <span class="link-card-label">Flagyard</span>
+                <span class="link-card-arrow">-></span>
+            </a>
+        </div>
+ 
+        <!-- Stats -->
+        <div class="section-header">STATS</div>
+        <div class="stats fade-in">
+            <div class="stat-card">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Bugs Found</div>
             </div>
-            <div class="flex gap-6">
-                <a href="https://twitter.com/w_4nj" target="_blank" rel="noopener noreferrer" class="social-icon text-gray-400 hover:text-cyan-400">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                    </svg>
-                </a>
-                <a href="https://github.com/0x4s3m" target="_blank" rel="noopener noreferrer" class="social-icon text-gray-400 hover:text-cyan-400">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
-                        <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
-                    </svg>
-                </a>
+            <div class="stat-card">
+                <div class="stat-number">3</div>
+                <div class="stat-label">Platforms</div>
             </div>
-        </header>
-
-        <!-- Platforms Section -->
-        <section class="py-20" data-aos="fade-up">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">
-                Active <span class="text-cyan-400">Platforms</span>
-            </h2>
-            <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-                Engaging with the security community across multiple bug bounty and CTF platforms.
-            </p>
-            
-            <div class="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-                <!-- Bugcrowd -->
-                <a href="https://bugcrowd.com/h/0x4s3m" target="_blank" rel="noopener noreferrer" class="platform-badge rounded-lg p-6 text-center block" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="text-4xl mb-3">🐛</div>
-                    <h3 class="text-lg font-semibold mb-2 mono text-cyan-300">Bugcrowd</h3>
-                    <p class="text-sm text-gray-400">Bug Bounty Platform</p>
-                    <p class="text-xs text-emerald-400 mt-3 mono">View Profile →</p>
-                </a>
-
-                <!-- HackTheBox -->
-                <a href="https://app.hackthebox.com/users/3060841" target="_blank" rel="noopener noreferrer" class="platform-badge rounded-lg p-6 text-center block" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="text-4xl mb-3">📦</div>
-                    <h3 class="text-lg font-semibold mb-2 mono text-cyan-300">HackTheBox</h3>
-                    <p class="text-sm text-gray-400">Penetration Testing Labs</p>
-                    <p class="text-xs text-emerald-400 mt-3 mono">View Profile →</p>
-                </a>
-
-                <!-- Flagyard -->
-                <a href="https://flagyard.com/profile/0x4s3m" target="_blank" rel="noopener noreferrer" class="platform-badge rounded-lg p-6 text-center block" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="text-4xl mb-3">🚩</div>
-                    <h3 class="text-lg font-semibold mb-2 mono text-cyan-300">Flagyard</h3>
-                    <p class="text-sm text-gray-400">CTF & Challenges</p>
-                    <p class="text-xs text-emerald-400 mt-3 mono">View Profile →</p>
-                </a>
+            <div class="stat-card">
+                <div class="stat-number">2</div>
+                <div class="stat-label">Certs</div>
             </div>
-        </section>
-
-        <!-- Notable Findings Section -->
-        <section class="py-20" data-aos="fade-up">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">
-                Notable <span class="text-cyan-400">Findings</span>
-            </h2>
-            <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-                Critical vulnerabilities discovered through responsible disclosure programs.
-            </p>
-            
-            <div class="grid md:grid-cols-2 gap-6">
-                <!-- Finding 1 -->
-                <div class="card rounded-lg p-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-sm text-gray-500 mono">Recent</span>
-                        <span class="amount-badge px-3 py-1 rounded-full text-sm mono font-medium">Critical</span>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3 text-cyan-300">Authentication Bypass Vulnerability</h3>
-                    <p class="text-gray-400 mb-4 leading-relaxed">
-                        Discovered critical authentication flaw allowing unauthorized access to protected resources. Responsibly disclosed and patched.
-                    </p>
-                    <a href="#" class="link-hover text-cyan-400 text-sm mono font-medium inline-block">
-                        Read more →
-                    </a>
+        </div>
+ 
+        <!-- Findings -->
+        <div class="section-header">NOTABLE FINDINGS</div>
+ 
+        <div class="filters">
+            <button class="filter-tag active" onclick="filterFindings('all')">[ALL]</button>
+            <button class="filter-tag" onclick="filterFindings('critical')">[CRITICAL]</button>
+            <button class="filter-tag" onclick="filterFindings('high')">[HIGH]</button>
+            <button class="filter-tag" onclick="filterFindings('medium')">[MEDIUM]</button>
+        </div>
+ 
+        <div id="findings-list">
+            <div class="finding-card" data-severity="critical">
+                <div class="finding-header">
+                    <span class="finding-title">Authentication Bypass</span>
+                    <span class="severity critical">[CRITICAL]</span>
                 </div>
-
-                <!-- Finding 2 -->
-                <div class="card rounded-lg p-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-sm text-gray-500 mono">Recent</span>
-                        <span class="amount-badge px-3 py-1 rounded-full text-sm mono font-medium">High</span>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3 text-cyan-300">SQL Injection in API Endpoint</h3>
-                    <p class="text-gray-400 mb-4 leading-relaxed">
-                        Identified SQL injection vulnerability in API allowing unauthorized data extraction. Reported through bug bounty program.
-                    </p>
-                    <a href="#" class="link-hover text-cyan-400 text-sm mono font-medium inline-block">
-                        Read more →
-                    </a>
-                </div>
-
-                <!-- Finding 3 -->
-                <div class="card rounded-lg p-6" data-aos="fade-up" data-aos-delay="300">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-sm text-gray-500 mono">Recent</span>
-                        <span class="amount-badge px-3 py-1 rounded-full text-sm mono font-medium">Medium</span>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3 text-cyan-300">IDOR in User Management</h3>
-                    <p class="text-gray-400 mb-4 leading-relaxed">
-                        Uncovered Insecure Direct Object Reference allowing access to other users' sensitive information through predictable identifiers.
-                    </p>
-                    <a href="#" class="link-hover text-cyan-400 text-sm mono font-medium inline-block">
-                        Read more →
-                    </a>
-                </div>
-
-                <!-- Finding 4 -->
-                <div class="card rounded-lg p-6" data-aos="fade-up" data-aos-delay="400">
-                    <div class="flex justify-between items-start mb-4">
-                        <span class="text-sm text-gray-500 mono">Recent</span>
-                        <span class="amount-badge px-3 py-1 rounded-full text-sm mono font-medium">High</span>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-3 text-cyan-300">XSS Leading to Account Takeover</h3>
-                    <p class="text-gray-400 mb-4 leading-relaxed">
-                        Found stored XSS vulnerability that could be chained with session hijacking for complete account compromise.
-                    </p>
-                    <a href="#" class="link-hover text-cyan-400 text-sm mono font-medium inline-block">
-                        Read more →
-                    </a>
+                <p class="finding-desc">Discovered critical authentication flaw allowing unauthorized access to protected resources. Responsibly disclosed and patched.</p>
+                <div class="finding-meta">
+                    <span>// bug bounty</span>
+                    <span>// web app</span>
                 </div>
             </div>
-        </section>
-
-        <!-- Certifications Section -->
-        <section class="py-20" data-aos="fade-up">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">
-                <span class="text-cyan-400">Certifications</span>
-            </h2>
-            <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-                Professional certifications demonstrating offensive security expertise.
-            </p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-                <!-- Cert 1 -->
-                <div class="badge rounded-lg p-6" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="flex items-start gap-4">
-                        <div class="text-4xl">🛡️</div>
-                        <div class="flex-1">
-                            <h3 class="text-lg font-semibold mb-2 mono text-cyan-300">WEB-RTA</h3>
-                            <p class="text-sm text-gray-400">CyberWarfare Labs</p>
-                            <p class="text-xs text-gray-500 mt-2">Web Real-Time Attack Certification</p>
-                        </div>
-                    </div>
+ 
+            <div class="finding-card" data-severity="high">
+                <div class="finding-header">
+                    <span class="finding-title">SQL Injection in API Endpoint</span>
+                    <span class="severity high">[HIGH]</span>
                 </div>
-
-                <!-- Cert 2 -->
-                <div class="badge rounded-lg p-6" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="flex items-start gap-4">
-                        <div class="text-4xl">🎓</div>
-                        <div class="flex-1">
-                            <h3 class="text-lg font-semibold mb-2 mono text-cyan-300">Bug Bounty Jr</h3>
-                            <p class="text-sm text-gray-400">Tuwaiq Academy</p>
-                            <p class="text-xs text-gray-500 mt-2">Bug Bounty Bootcamp Certification</p>
-                        </div>
-                    </div>
+                <p class="finding-desc">Identified SQL injection vulnerability in API allowing unauthorized data extraction. Reported through bug bounty program.</p>
+                <div class="finding-meta">
+                    <span>// api</span>
+                    <span>// data exposure</span>
                 </div>
             </div>
-        </section>
-
-        <!-- Toolkit Section -->
-        <section class="py-20" data-aos="fade-up">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4 text-center">
-                Security <span class="text-cyan-400">Arsenal</span>
-            </h2>
-            <p class="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
-                Sophisticated tooling and methodologies for comprehensive security assessments.
-            </p>
-            
-            <div class="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
-                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="50">Burp Suite</span>
-                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="100">Nuclei</span>
-                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="150">ffuf</span>
-                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="200">sqlmap</span>
-                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="250">httpx</span>
-                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="300">Metasploit</span>
-                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="350">Subfinder</span>
-                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="400">Amass</span>
-                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="450">katana</span>
-                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="500">Custom Scripts</span>
-                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="550">Nmap</span>
-                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="600">Gobuster</span>
-                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="650">Bloodhound</span>
-                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="700">Responder</span>
-                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="750">Wireshark</span>
-                <span class="tool-tag px-4 py-2 rounded-lg mono text-sm" data-aos="fade-up" data-aos-delay="800">Python</span>
+ 
+            <div class="finding-card" data-severity="high">
+                <div class="finding-header">
+                    <span class="finding-title">XSS Leading to Account Takeover</span>
+                    <span class="severity high">[HIGH]</span>
+                </div>
+                <p class="finding-desc">Found stored XSS vulnerability that could be chained with session hijacking for complete account compromise.</p>
+                <div class="finding-meta">
+                    <span>// stored xss</span>
+                    <span>// account takeover</span>
+                </div>
             </div>
-        </section>
-
+ 
+            <div class="finding-card" data-severity="medium">
+                <div class="finding-header">
+                    <span class="finding-title">IDOR in User Management</span>
+                    <span class="severity medium">[MEDIUM]</span>
+                </div>
+                <p class="finding-desc">Uncovered Insecure Direct Object Reference allowing access to other users' sensitive information through predictable identifiers.</p>
+                <div class="finding-meta">
+                    <span>// idor</span>
+                    <span>// access control</span>
+                </div>
+            </div>
+        </div>
+ 
+        <!-- Certifications -->
+        <div class="section-header">CERTIFICATIONS</div>
+ 
+        <div class="cert-card">
+            <div class="cert-icon">&gt;_</div>
+            <div class="cert-info">
+                <div class="cert-name">WEB-RTA</div>
+                <div class="cert-issuer">CyberWarfare Labs // Web Real-Time Attack</div>
+            </div>
+        </div>
+ 
+        <div class="cert-card">
+            <div class="cert-icon">&gt;_</div>
+            <div class="cert-info">
+                <div class="cert-name">Bug Bounty Jr</div>
+                <div class="cert-issuer">Tuwaiq Academy // Bug Bounty Bootcamp</div>
+            </div>
+        </div>
+ 
+        <!-- Arsenal -->
+        <div class="section-header">ARSENAL</div>
+ 
+        <div class="filters">
+            <button class="filter-tag active" onclick="filterTools('all')">[ALL]</button>
+            <button class="filter-tag" onclick="filterTools('recon')">[RECON]</button>
+            <button class="filter-tag" onclick="filterTools('exploit')">[EXPLOIT]</button>
+            <button class="filter-tag" onclick="filterTools('scan')">[SCAN]</button>
+            <button class="filter-tag" onclick="filterTools('util')">[UTIL]</button>
+        </div>
+ 
+        <div class="tools-grid" id="tools-grid">
+            <span class="tool-tag" data-cat="exploit">Burp Suite</span>
+            <span class="tool-tag" data-cat="scan">Nuclei</span>
+            <span class="tool-tag" data-cat="recon">ffuf</span>
+            <span class="tool-tag" data-cat="exploit">sqlmap</span>
+            <span class="tool-tag" data-cat="scan">httpx</span>
+            <span class="tool-tag" data-cat="exploit">Metasploit</span>
+            <span class="tool-tag" data-cat="recon">Subfinder</span>
+            <span class="tool-tag" data-cat="recon">Amass</span>
+            <span class="tool-tag" data-cat="recon">katana</span>
+            <span class="tool-tag" data-cat="scan">Nmap</span>
+            <span class="tool-tag" data-cat="recon">Gobuster</span>
+            <span class="tool-tag" data-cat="exploit">Bloodhound</span>
+            <span class="tool-tag" data-cat="exploit">Responder</span>
+            <span class="tool-tag" data-cat="scan">Wireshark</span>
+            <span class="tool-tag" data-cat="util">Python</span>
+            <span class="tool-tag" data-cat="util">Custom Scripts</span>
+        </div>
+ 
         <!-- Footer -->
-        <footer class="py-12 text-center border-t border-gray-800 mt-20" data-aos="fade-up">
-            <p class="text-gray-500 text-sm mono">
-                © 2026 0x4s3m <span class="text-cyan-400">|</span> Ethical hacking & responsible disclosure
-            </p>
-            <p class="text-gray-600 text-xs mt-2">
-                All findings reported through official bug bounty programs
-            </p>
+        <footer class="footer">
+            <p>&copy; 2026 0x4s3m</p>
+            <p>ethical hacking & responsible disclosure</p>
         </footer>
+ 
     </div>
-
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+ 
     <script>
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 50,
-            easing: 'ease-out-cubic'
+        // Findings filter
+        function filterFindings(severity) {
+            const cards = document.querySelectorAll('.finding-card');
+            const buttons = document.querySelectorAll('.filters')[0].querySelectorAll('.filter-tag');
+ 
+            buttons.forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+ 
+            cards.forEach(card => {
+                if (severity === 'all' || card.dataset.severity === severity) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+ 
+        // Tools filter
+        function filterTools(cat) {
+            const tags = document.querySelectorAll('#tools-grid .tool-tag');
+            const buttons = document.querySelectorAll('.filters')[1].querySelectorAll('.filter-tag');
+ 
+            buttons.forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+ 
+            tags.forEach(tag => {
+                if (cat === 'all' || tag.dataset.cat === cat) {
+                    tag.style.display = 'inline-block';
+                } else {
+                    tag.style.display = 'none';
+                }
+            });
+        }
+ 
+        // Intersection Observer for scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+ 
+        document.querySelectorAll('.finding-card, .cert-card, .stat-card, .tool-tag').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(12px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(el);
         });
     </script>
 </body>
