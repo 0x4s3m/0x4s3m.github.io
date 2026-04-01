@@ -6,7 +6,7 @@
     <title>0x4s3m - eWPTX</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -25,7 +25,6 @@
             --accent-yellow: #ffd444;
             --accent-purple: #c084fc;
             --font-arabic: 'IBM Plex Sans Arabic', sans-serif;
-            --font-en: 'Inter', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
         }
 
@@ -39,7 +38,6 @@
             line-height: 1.9;
             font-size: 15px;
         }
-        body.en { font-family: var(--font-en); direction: ltr; }
 
         ::selection { background: var(--accent-red); color: #000; }
         a { color: var(--accent-cyan); text-decoration: none; transition: color 0.3s; }
@@ -48,27 +46,6 @@
         .container { max-width: 750px; margin: 0 auto; padding: 60px 24px 80px; }
 
         /* Lang Toggle */
-        .lang-toggle {
-            display: flex;
-            justify-content: center;
-            gap: 6px;
-            margin-bottom: 30px;
-            font-family: var(--font-mono);
-        }
-        .lang-btn {
-            padding: 4px 14px;
-            border-radius: 4px;
-            border: 1px solid var(--border-hover);
-            background: transparent;
-            color: var(--text-dim);
-            cursor: pointer;
-            transition: all 0.25s;
-            font-family: var(--font-mono);
-            font-size: 11px;
-            letter-spacing: 1px;
-        }
-        .lang-btn.active { border-color: var(--accent-red); color: var(--accent-red); background: rgba(255,68,68,0.06); }
-        .lang-btn:hover:not(.active) { color: var(--text-bright); border-color: var(--border-hover); }
 
         /* Nav */
         .nav {
@@ -98,7 +75,6 @@
             padding-right: 16px; border-right: 3px solid var(--accent-red);
             text-align: right; max-width: 600px; margin: 0 auto;
         }
-        body.en .article-summary { padding-right: 0; padding-left: 16px; border-right: none; border-left: 3px solid var(--accent-red); text-align: left; }
 
         /* Content */
         .content { margin-top: 50px; }
@@ -113,7 +89,6 @@
         .content h3 { font-size: 15px; font-weight: 600; color: var(--text-bright); margin-top: 30px; margin-bottom: 14px; }
         .content p  { font-size: 15px; color: var(--text); line-height: 2; margin-bottom: 18px; }
         .content ul, .content ol { margin-bottom: 18px; padding-right: 24px; }
-        body.en .content ul, body.en .content ol { padding-right: 0; padding-left: 24px; }
         .content li { font-size: 14px; color: var(--text); line-height: 2; margin-bottom: 6px; }
         .content li::marker { color: var(--accent-red); }
         .content strong { color: var(--text-bright); font-weight: 600; }
@@ -122,15 +97,10 @@
 
         /* Info Box */
         .info-box { background: var(--bg-card); border: 1px solid var(--border); border-right: 3px solid var(--accent-red); border-radius: 8px; padding: 20px 22px; margin-bottom: 24px; }
-        body.en .info-box { border-right: 1px solid var(--border); border-left: 3px solid var(--accent-red); }
         .info-box.green  { border-right-color: var(--accent-green);  }
         .info-box.cyan   { border-right-color: var(--accent-cyan);   }
         .info-box.yellow { border-right-color: var(--accent-yellow); }
         .info-box.purple { border-right-color: var(--accent-purple); }
-        body.en .info-box.green  { border-right-color: var(--border); border-left-color: var(--accent-green);  }
-        body.en .info-box.cyan   { border-right-color: var(--border); border-left-color: var(--accent-cyan);   }
-        body.en .info-box.yellow { border-right-color: var(--border); border-left-color: var(--accent-yellow); }
-        body.en .info-box.purple { border-right-color: var(--border); border-left-color: var(--accent-purple); }
         .info-box-title { font-size: 12px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--accent-red); margin-bottom: 10px; font-family: var(--font-mono); direction: ltr; }
         .info-box.green  .info-box-title { color: var(--accent-green);  }
         .info-box.cyan   .info-box-title { color: var(--accent-cyan);   }
@@ -141,7 +111,6 @@
         /* Steps */
         .steps { counter-reset: step; list-style: none; padding: 0; margin-bottom: 24px; }
         .steps li { counter-increment: step; position: relative; padding-right: 50px; margin-bottom: 18px; font-size: 14px; color: var(--text); line-height: 1.9; }
-        body.en .steps li { padding-right: 0; padding-left: 50px; }
         .steps li::before {
             content: counter(step, decimal-leading-zero);
             position: absolute; right: 0; top: 2px;
@@ -149,7 +118,6 @@
             width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
             border: 1px solid rgba(255,68,68,0.2); border-radius: 6px; background: rgba(255,68,68,0.05);
         }
-        body.en .steps li::before { right: auto; left: 0; }
 
         /* Stat Cards */
         .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 28px; }
@@ -161,7 +129,6 @@
         .table-wrapper { overflow-x: auto; margin-bottom: 24px; border: 1px solid var(--border); border-radius: 8px; }
         .table-wrapper table { width: 100%; border-collapse: collapse; font-size: 13px; }
         .table-wrapper th { background: var(--bg-card); color: var(--text-bright); font-weight: 600; padding: 12px 16px; text-align: right; border-bottom: 1px solid var(--border); font-size: 12px; }
-        body.en .table-wrapper th { text-align: left; }
         .table-wrapper td { padding: 10px 16px; border-bottom: 1px solid var(--border); color: var(--text); }
         .table-wrapper tr:last-child td { border-bottom: none; }
         .table-wrapper tr:hover td { background: var(--bg-card); }
@@ -185,10 +152,6 @@
         .delay-2 { animation-delay: 0.2s; }
 
         /* Lang visibility */
-        .ar { display: revert; }
-        .en { display: none; }
-        body.en .ar { display: none; }
-        body.en .en { display: revert; }
 
         @media (max-width: 600px) {
             .container { padding: 40px 16px 60px; }
@@ -198,11 +161,6 @@
 </head>
 <body>
 <div class="container">
-
-    <div class="lang-toggle fade-in">
-        <button class="lang-btn active" id="btn-ar" onclick="setLang('ar')">AR</button>
-        <button class="lang-btn"        id="btn-en" onclick="setLang('en')">EN</button>
-    </div>
 
     <nav class="nav fade-in">
         <span>~</span> / <a href="../index.html">home</a> / <a href="../writeups.html">writeups</a> / <span>eWPTXv3</span>
@@ -216,8 +174,8 @@
         </div>
         <h1 class="article-title">eWPTXv3</h1>
         <p class="article-summary">
-            <span class="ar">تجربتي الكاملة في التحضير واجتياز شهادة eWPTXv3</span>
-            <span class="en">My full experience preparing for and passing the eWPTXv3 certification</span>
+            <span>تجربتي الكاملة في التحضير واجتياز شهادة eWPTXv3</span>
+            
         </p>
     </div>
 
@@ -225,87 +183,87 @@
 
         <h2>
             <span class="section-num">01 //</span>
-            <span class="ar">المقدمة</span><span class="en">Introduction</span>
+            <span>المقدمة</span>
         </h2>
 
-        <p class="ar">﴿ وَمَا رَمَيْتَ إِذْ رَمَيْتَ وَلَٰكِنَّ اللَّهَ رَمَىٰ ﴾</p>
-        <p class="en" style="font-style:italic;color:var(--text-dim)">"And you threw not, when you threw, but it was Allah who threw." — Quran 8:17</p>
+        <p>﴿ وَمَا رَمَيْتَ إِذْ رَمَيْتَ وَلَٰكِنَّ اللَّهَ رَمَىٰ ﴾</p>
+        
 
-        <p class="ar">أهلا، أنا عاصم — مختبر اختراق من بداية سنة 2024. هذا الرايت اب عن تجربتي في التحضير لشهادة <strong>eWPTXv3</strong> وكيف قدرت أجهز لها في مدة زمنية قياسية، وايش المصاعب اللي واجهتني على الطريق.</p>
-        <p class="en">Hey, I'm Asim — a penetration tester since early 2024. This writeup covers my experience preparing for the <strong>eWPTXv3</strong> certification, how I managed to get ready in record time, and the challenges I faced along the way.</p>
+        <p>أهلا، أنا عاصم — مختبر اختراق من بداية سنة 2024. هذا الرايت اب عن تجربتي في التحضير لشهادة <strong>eWPTXv3</strong> وكيف قدرت أجهز لها في مدة زمنية قياسية، وايش المصاعب اللي واجهتني على الطريق.</p>
+         certification, how I managed to get ready in record time, and the challenges I faced along the way.</p>
 
         <div class="info-box">
             <div class="info-box-title">
-                // <span class="ar">ايش هي eWPTX</span><span class="en">What is eWPTX?</span>
+                // <span>ايش هي eWPTX</span>
             </div>
-            <p class="ar">شهادة متقدمة من INE Security تركّز على اختبار اختراق تطبيقات الويب على مستوى advanced. تغطي مواضيع مثل XSS المتقدم، XXE، SSRF، Deserialization، OAuth attacks، وغيرها. الاختبار يتكوّن من <strong>أسئلة نظرية</strong> + <strong>لاب عملي</strong> تفحص فيه مواقع حقيقية وتطلع منها ثغرات.</p>
-            <p class="en">An advanced certification from INE Security focused on web application penetration testing at expert level. It covers advanced XSS, XXE, SSRF, Deserialization, OAuth attacks, and more. The exam consists of <strong>theoretical questions</strong> + a <strong>practical lab</strong> where you test real targets and extract vulnerabilities.</p>
+            <p>شهادة متقدمة من INE Security تركّز على اختبار اختراق تطبيقات الويب على مستوى advanced. تغطي مواضيع مثل XSS المتقدم، XXE، SSRF، Deserialization، OAuth attacks، وغيرها. الاختبار يتكوّن من <strong>أسئلة نظرية</strong> + <strong>لاب عملي</strong> تفحص فيه مواقع حقيقية وتطلع منها ثغرات.</p>
+             + a <strong>practical lab</strong> where you test real targets and extract vulnerabilities.</p>
         </div>
 
         <h2>
             <span class="section-num">02 //</span>
-            <span class="ar">أرقام سريعة</span><span class="en">Quick Stats</span>
+            <span>أرقام سريعة</span>
         </h2>
 
         <div class="stat-grid">
             <div class="stat-card">
                 <span class="stat-value">7</span>
-                <span class="stat-label ar">أسابيع تحضير</span>
-                <span class="stat-label en">weeks prep</span>
+                <span class="stat-label">أسابيع تحضير</span>
+                
             </div>
             <div class="stat-card">
                 <span class="stat-value">41</span>
-                <span class="stat-label ar">ساعات دراسة</span>
-                <span class="stat-label en">study hours</span>
+                <span class="stat-label">ساعات دراسة</span>
+                
             </div>
             <div class="stat-card">
                 <span class="stat-value">18h</span>
-                <span class="stat-label ar">مدة الاختبار</span>
-                <span class="stat-label en">exam duration</span>
+                <span class="stat-label">مدة الاختبار</span>
+                
             </div>
             <div class="stat-card">
                 <span class="stat-value">39</span>
-                <span class="stat-label ar">فلاقز محلولة</span>
-                <span class="stat-label en">flags solved</span>
+                <span class="stat-label">فلاقز محلولة</span>
+                
             </div>
         </div>
 
         <h2>
             <span class="section-num">03 //</span>
-            <span class="ar">عن الشهادة</span><span class="en">About the Cert</span>
+            <span>عن الشهادة</span>
         </h2>
 
         <div class="table-wrapper">
             <table>
                 <thead>
                     <tr>
-                        <th class="ar">العنصر</th><th class="en">Field</th>
-                        <th class="ar">التفاصيل</th><th class="en">Details</th>
+                        <th>العنصر</th>
+                        <th>التفاصيل</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="ar"><strong>المصدر</strong></td><td class="en"><strong>Provider</strong></td>
+                        <td><strong>المصدر</strong></td></td>
                         <td colspan="1">INE Security (eLearnSecurity)</td>
                     </tr>
                     <tr>
-                        <td class="ar"><strong>المستوى</strong></td><td class="en"><strong>Level</strong></td>
+                        <td><strong>المستوى</strong></td></td>
                         <td colspan="1">Advanced / Expert</td>
                     </tr>
                     <tr>
-                        <td class="ar"><strong>نوع الاختبار</strong></td><td class="en"><strong>Exam Type</strong></td>
-                        <td class="ar">أسئلة نظرية + لاب عملي (فحص مواقع واستخراج ثغرات)</td>
-                        <td class="en">Theoretical questions + practical lab (test targets &amp; find vulnerabilities)</td>
+                        <td><strong>نوع الاختبار</strong></td></td>
+                        <td>أسئلة نظرية + لاب عملي (فحص مواقع واستخراج ثغرات)</td>
+                        
                     </tr>
                     <tr>
-                        <td class="ar"><strong>مدة الاختبار</strong></td><td class="en"><strong>Duration</strong></td>
-                        <td class="ar">18 ساعة</td>
-                        <td class="en">18 hours</td>
+                        <td><strong>مدة الاختبار</strong></td></td>
+                        <td>18 ساعة</td>
+                        
                     </tr>
                     <tr>
-                        <td class="ar"><strong>المتطلبات المسبقة</strong></td><td class="en"><strong>Prerequisites</strong></td>
-                        <td class="ar">eWPT أو خبرة مكافئة</td>
-                        <td class="en">eWPT or equivalent experience</td>
+                        <td><strong>المتطلبات المسبقة</strong></td></td>
+                        <td>eWPT أو خبرة مكافئة</td>
+                        
                     </tr>
                 </tbody>
             </table>
@@ -313,74 +271,74 @@
 
         <h2>
             <span class="section-num">04 //</span>
-            <span class="ar">كيف حضّرت لها</span><span class="en">How I Prepared</span>
+            <span>كيف حضّرت لها</span>
         </h2>
 
         <h3>
-            <span class="ar">المواد اللي استخدمتها</span><span class="en">Resources I Used</span>
+            <span>المواد اللي استخدمتها</span>
         </h3>
         <ul>
-            <li class="ar"><strong>كورس INE — WAPT Advanced</strong> — محتوى الشهادة الاساسي</li>
-            <li class="en"><strong>INE Course — WAPT Advanced</strong> — The core cert material</li>
-            <li class="ar"><strong>HackTheBox / Web Penetration Tester Role Path</strong> — رهيب جدا ك بداية</li>
-            <li class="en"><strong>HackTheBox / Web Penetration Tester Role Path</strong> — Excellent as a starting point</li>
-            <li class="ar"><strong>PortSwigger Web Academy</strong> — ممتاز للتدريب</li>
-            <li class="en"><strong>PortSwigger Web Academy</strong> — Great for hands-on practice</li>
+            <li><strong>كورس INE — WAPT Advanced</strong> — محتوى الشهادة الاساسي</li>
+             — The core cert material</li>
+            <li><strong>HackTheBox / Web Penetration Tester Role Path</strong> — رهيب جدا ك بداية</li>
+             — Excellent as a starting point</li>
+            <li><strong>PortSwigger Web Academy</strong> — ممتاز للتدريب</li>
+             — Great for hands-on practice</li>
         </ul>
 
         <div class="info-box cyan">
-            <div class="info-box-title">// <span class="ar">نصيحة للتحضير</span><span class="en">Prep Tip</span></div>
-            <p class="ar">لا تتعلم نظري فقط لانك راح تتعب نفسك على الفاضي، دايم تدرب عشان تثبت المعلومة</p>
-            <p class="en">Don't just study theory — you'll burn yourself out for nothing. Always practice to actually retain what you learn.</p>
+            <div class="info-box-title">// <span>نصيحة للتحضير</span></div>
+            <p>لا تتعلم نظري فقط لانك راح تتعب نفسك على الفاضي، دايم تدرب عشان تثبت المعلومة</p>
+            
         </div>
 
         <h2>
             <span class="section-num">05 //</span>
-            <span class="ar">المواضيع الأساسية في الاختبار</span><span class="en">Key Exam Topics</span>
+            <span>المواضيع الأساسية في الاختبار</span>
         </h2>
 
-        <p class="ar">هذي أبرز المواضيع اللي لازم تكون قوي فيها قبل ما تدخل الاختبار:</p>
-        <p class="en">These are the most important topics you need to be solid on before sitting the exam:</p>
+        <p>هذي أبرز المواضيع اللي لازم تكون قوي فيها قبل ما تدخل الاختبار:</p>
+        
 
         <div class="table-wrapper">
             <table>
                 <thead>
                     <tr>
-                        <th class="ar">الموضوع</th><th class="en">Topic</th>
-                        <th class="ar">الصعوبة</th><th class="en">Difficulty</th>
-                        <th class="ar">ملاحظات</th><th class="en">Notes</th>
+                        <th>الموضوع</th>
+                        <th>الصعوبة</th>
+                        <th>ملاحظات</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>Advanced XSS &amp; Filter Bypass</td>
                         <td><span class="diff medium">Medium</span></td>
-                        <td class="ar">خصوصا ال Blind</td>
-                        <td class="en">Especially Blind XSS</td>
+                        <td>خصوصا ال Blind</td>
+                        
                     </tr>
                     <tr>
                         <td>Auth Bypass</td>
                         <td><span class="diff medium">Medium</span></td>
-                        <td class="ar">كيف تقدر تتجاوز ال 403 الخ...</td>
-                        <td class="en">Bypassing 403s and similar restrictions</td>
+                        <td>كيف تقدر تتجاوز ال 403 الخ...</td>
+                        
                     </tr>
                     <tr>
                         <td>SSRF</td>
                         <td><span class="diff hard">Hard</span></td>
-                        <td class="ar">كيف تقدر توصل ل IPs داخليه</td>
-                        <td class="en">Reaching internal IPs via server-side requests</td>
+                        <td>كيف تقدر توصل ل IPs داخليه</td>
+                        
                     </tr>
                     <tr>
                         <td>Chained Attacks</td>
                         <td><span class="diff hard">Hard</span></td>
-                        <td class="ar">كيف تربط ثغرة بأُخرى بحيث تزيد الخطورة</td>
-                        <td class="en">Chaining vulnerabilities to escalate impact</td>
+                        <td>كيف تربط ثغرة بأُخرى بحيث تزيد الخطورة</td>
+                        
                     </tr>
                     <tr>
                         <td>OAuth / JWT Attacks</td>
                         <td><span class="diff hard">Hard</span></td>
-                        <td class="ar">كيف تغير الTokens وتعدل عليها</td>
-                        <td class="en">Manipulating and forging tokens</td>
+                        <td>كيف تغير الTokens وتعدل عليها</td>
+                        
                     </tr>
                     <tr>
                         <td>SQLi Advanced</td>
@@ -390,8 +348,8 @@
                     <tr>
                         <td>API Testing</td>
                         <td><span class="diff medium">Medium</span></td>
-                        <td class="ar">كيف تتعامل مع ال API والEndpoints حقتها وكيف توصل لاشياء داخليه او مخفيه</td>
-                        <td class="en">Working with API endpoints to uncover hidden or internal resources</td>
+                        <td>كيف تتعامل مع ال API والEndpoints حقتها وكيف توصل لاشياء داخليه او مخفيه</td>
+                        
                     </tr>
                 </tbody>
             </table>
@@ -399,69 +357,64 @@
 
         <h2>
             <span class="section-num">06 //</span>
-            <span class="ar">تجربة الاختبار</span><span class="en">Exam Experience</span>
+            <span>تجربة الاختبار</span>
         </h2>
 
         <h3>
-            <span class="ar">الأدوات اللي استخدمتها</span><span class="en">Tools I Used</span>
+            <span>الأدوات اللي استخدمتها</span>
         </h3>
         <ul>
             <li>
                 <code>Kali Linux</code> —
-                <span class="ar">هم راح يفتحون لك Environment بحيث تختبر عليه</span>
-                <span class="en">They provide a full environment to work in</span>
+                <span>هم راح يفتحون لك Environment بحيث تختبر عليه</span>
+                
             </li>
             <li>
                 <code>Notion</code> —
-                <span class="ar">اسجل نوتات فيه</span>
-                <span class="en">For taking structured notes</span>
+                <span>اسجل نوتات فيه</span>
+                
             </li>
         </ul>
 
         <div class="info-box yellow">
-            <div class="info-box-title">// <span class="ar">تجربة يوم من الاختبار</span><span class="en">A Day in the Exam</span></div>
-            <p class="ar">وقت الاختبار لازم تكون مركز ومروق لان راح تواجه تعليق في ال Environment خلك صبور شويتين</p>
-            <p class="en">Stay focused and calm during the exam — the environment will freeze on you at times, just be patient.</p>
+            <div class="info-box-title">// <span>تجربة يوم من الاختبار</span></div>
+            <p>وقت الاختبار لازم تكون مركز ومروق لان راح تواجه تعليق في ال Environment خلك صبور شويتين</p>
+            
         </div>
 
         <h2>
             <span class="section-num">07 //</span>
-            <span class="ar">نصائحي لك</span><span class="en">My Tips</span>
+            <span>نصائحي لك</span>
         </h2>
 
         <ol class="steps">
-            <li class="ar">استعن بالله قبل كل شي</li>
-            <li class="en">Start with bismillah — trust the process</li>
-            <li class="ar">افهم المحتوى كويس قبل تدخل</li>
-            <li class="en">Understand the material thoroughly before attempting the exam</li>
-            <li class="ar">تأكد ان الشبكة عندك ممتازة</li>
-            <li class="en">Make sure your internet connection is stable</li>
-            <li class="ar">لا تستعجل، لا تستعجل — عندك 18 ساعه تقدر تحل كل الاسئله بأرياحيه</li>
-            <li class="en">Don't rush, don't rush — you have 18 hours, use them comfortably</li>
+            <li>استعن بالله قبل كل شي</li>
+            
+            <li>افهم المحتوى كويس قبل تدخل</li>
+            
+            <li>تأكد ان الشبكة عندك ممتازة</li>
+            
+            <li>لا تستعجل، لا تستعجل — عندك 18 ساعه تقدر تحل كل الاسئله بأرياحيه</li>
+            
         </ol>
 
         <h2>
             <span class="section-num">08 //</span>
-            <span class="ar">الخلاصة</span><span class="en">Conclusion</span>
+            <span>الخلاصة</span>
         </h2>
 
-        <p class="ar">الشهادة محتواها رهيب صراحةً بس الاختبار كان اقل صعوبة من المحتوى من ناحيه الأسئلة والتطبيق العملي. انصح فيها صراحة لو كنت تبي تطور مستواك في الWeb.</p>
-        <p class="en">The course content is genuinely great, but the exam itself was less challenging than the material in terms of both questions and practical application. I definitely recommend it if you want to level up your web security skills.</p>
+        <p>الشهادة محتواها رهيب صراحةً بس الاختبار كان اقل صعوبة من المحتوى من ناحيه الأسئلة والتطبيق العملي. انصح فيها صراحة لو كنت تبي تطور مستواك في الWeb.</p>
+        
 
         <div class="info-box yellow">
-            <div class="info-box-title">// <span class="ar">الجدول الزمني</span><span class="en">Timeline</span></div>
-            <p class="ar">
+            <div class="info-box-title">// <span>الجدول الزمني</span></div>
+            <p>
                 بدأت التحضير: 3/1 &mdash;
                 دخلت الاختبار: 3/27 &mdash;
                 سلّمت الإختبار: بعد ساعتين من بداية الوقت &mdash;
                 النتيجة: تظهر بعد ما تسلم على طول
             </p>
-            <p class="en">
-                Started prep: Mar 1 &mdash;
-                Took the exam: Mar 27 &mdash;
-                Submitted: 2 hours after starting &mdash;
-                Result: Shows immediately after submission
-            </p>
+            
         </div>
 
         <div style="text-align:center; margin-top: 40px;">
@@ -484,24 +437,6 @@
     </footer>
 
 </div>
-<script>
-    function setLang(lang) {
-        const body = document.body;
-        const html = document.documentElement;
-        if (lang === 'en') {
-            body.classList.add('en');
-            html.setAttribute('lang', 'en');
-            html.setAttribute('dir', 'ltr');
-            document.getElementById('btn-en').classList.add('active');
-            document.getElementById('btn-ar').classList.remove('active');
-        } else {
-            body.classList.remove('en');
-            html.setAttribute('lang', 'ar');
-            html.setAttribute('dir', 'rtl');
-            document.getElementById('btn-ar').classList.add('active');
-            document.getElementById('btn-en').classList.remove('active');
-        }
-    }
-</script>
+
 </body>
 </html>
